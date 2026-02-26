@@ -1,0 +1,16 @@
+export const eventNames = {
+	CBONDS_DATA_UPDATED:   'cbonds.data.updated',
+	BINANCE_DATA_UPDATED:  'binance.data.updated',
+	TOTALS_UPDATED:        'totals.updated',
+	PORTFOLIO_CREATED:     'portfolio.created',
+	PORTFOLIO_ACTION:      'portfolio.action',
+	ASSET_ACTION:          'asset.action',
+	TRANSACTION_ACTION:    'transaction.asset',
+	ASSET_TRANSFER:        'asset.transfer',
+	CLIENT_DELETED:        'client.deleted',
+	CLIENT_LIST_UPDATED:   'client.list.updated',
+	BUDGET_LIST_UPDATED:   'budget.list.updated',
+	PORTFOLIO_EDITED:      'portfolio.edited',
+	CLIENTS_CACHE_UPDATE:  'clients.cache.update',
+	CLIENTS_TOTALS_UPDATE: 'clients.totals.update',
+}

@@ -1,0 +1,92 @@
+import { Module, } from '@nestjs/common'
+
+import { JwtModule, } from '../jwt/jwt.module'
+import { CBondsApiModule, } from '../apis/cbonds-api/cbonds-api.module'
+import {
+	CashController,
+	RealEstateController,
+	LoanAssetController,
+	BondAssetController,
+	OtherInvestmentsController,
+	MetalsController,
+	PrivateEquityAssetController,
+	OptionsController,
+	TransactionController,
+	EquityAssetController,
+	DepositAssetController,
+	CryptoAssetController,
+	OverviewController,
+} from './controllers'
+import {
+	CashService,
+	RealEstateService,
+	LoanAssetService,
+	BondAssetService,
+	OtherInvestmentsService,
+	MetalsService,
+	PrivateEquityAssetService,
+	OptionsService,
+	TransactionService,
+	EquityAssetService,
+	DepositService,
+	CryptoAssetService,
+	OverviewService,
+} from './services'
+import { CryptoModule, } from '../crypto/crypto.module'
+
+@Module({
+	controllers: [
+		CashController,
+		RealEstateController,
+		OptionsController,
+		LoanAssetController,
+		BondAssetController,
+		OtherInvestmentsController,
+		MetalsController,
+		EquityAssetController,
+		PrivateEquityAssetController,
+		TransactionController,
+		EquityAssetController,
+		DepositAssetController,
+		CryptoAssetController,
+		OverviewController,
+	],
+	providers: [
+		CashService,
+		RealEstateService,
+		OptionsService,
+		LoanAssetService,
+		BondAssetService,
+		OtherInvestmentsService,
+		MetalsService,
+		EquityAssetService,
+		PrivateEquityAssetService,
+		TransactionService,
+		EquityAssetService,
+		DepositService,
+		CryptoAssetService,
+		OverviewService,
+	],
+	exports:     [
+		CashService,
+		RealEstateService,
+		OptionsService,
+		LoanAssetService,
+		BondAssetService,
+		OtherInvestmentsService,
+		MetalsService,
+		EquityAssetService,
+		PrivateEquityAssetService,
+		TransactionService,
+		EquityAssetService,
+		DepositService,
+		CryptoAssetService,
+		OverviewService,
+	],
+	imports: [
+		JwtModule,
+		CBondsApiModule,
+		CryptoModule,
+	],
+},)
+export class AnalyticsModule {}

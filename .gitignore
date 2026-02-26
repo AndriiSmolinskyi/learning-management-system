@@ -1,0 +1,29 @@
+# env
+.env
+.env.*
+!.env.example
+
+# node
+node_modules/
+**/node_modules/
+
+# build
+dist/
+build/
+**/dist/
+**/build/
+
+# logs
+logs
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# prisma
+**/prisma/migrations/*
+!**/prisma/migrations/.keep

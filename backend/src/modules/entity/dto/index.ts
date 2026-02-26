@@ -1,0 +1,6 @@
+export * from './add-entity.dto'
+export * from './get-by-id.dto'
+export * from './add-entity-document.dto'
+export * from './update-entity.dto'
+export * from './delete-by-ids.dto'
+export * from './source-id.dto'

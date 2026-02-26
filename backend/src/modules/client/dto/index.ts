@@ -1,0 +1,6 @@
+export * from './add-client.dto'
+export * from './get-clients.dto'
+export * from './add-draft.dto'
+export * from './get-by-id.dto'
+export * from './update-client.dto'
+export * from './activate-client.dto'
