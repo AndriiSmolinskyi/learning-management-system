@@ -1,0 +1,45 @@
+{
+	"compilerOptions": {
+		"incremental": true,
+		"outDir": "./dist",
+		"baseUrl": ".",
+		"moduleResolution": "Node",
+		"module": "CommonJS",
+		"target": "ES2018",
+		"sourceMap": true,
+		"lib": [
+			"esnext"
+		],
+		"esModuleInterop": true,
+		"alwaysStrict": true,
+		"strictNullChecks": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": true,
+		"resolveJsonModule": true,
+		"paths": {
+			"@yarn-monorepo/*": [
+				"packages/frontend/*",
+				"packages/backend/*",
+				"packages/admin/*"
+			]
+		}
+	},
+	"references": [
+		{
+			"path": "./packages/backend"
+		},
+		{
+			"path": "./packages/frontend"
+		},
+		{
+			"path": "./packages/admin"
+		}
+	],
+	"exclude": [
+		"node_modules",
+		"dist",
+		"*.d.ts"
+	]
+}
