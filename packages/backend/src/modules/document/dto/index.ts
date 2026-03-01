@@ -1,7 +1,0 @@
-export * from './create-document.dto'
-export * from './update-document.dto'
-export * from './id.dto'
-export * from './source-id.dto'
-export * from './delete-by-ids.dto'
-export * from './download-document.dto'
-export * from './get-all-by-client.dto'

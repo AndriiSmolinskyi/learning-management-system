@@ -1,1 +1,0 @@
-export const THIRD_PARTY_PRISMA_SERVICE = 'ThirdPartyPrismaService' as const

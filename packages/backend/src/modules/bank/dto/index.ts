@@ -1,5 +1,0 @@
-export * from './add-bank.dto'
-export * from './get-by-id.dto'
-export * from './update-bank.dto'
-export * from './get-by-entity-ids.dto'
-export * from './source-id.dto'
