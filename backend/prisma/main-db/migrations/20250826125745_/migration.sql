@@ -1,8 +1,0 @@
--- AlterTable
-ALTER TABLE "Report" ALTER COLUMN "isins" SET DEFAULT ARRAY[]::VARCHAR(50)[];
-
--- AlterTable
-ALTER TABLE "ReportDraft" ALTER COLUMN "isins" SET DEFAULT ARRAY[]::VARCHAR(50)[];
-
--- AlterTable
-ALTER TABLE "TransactionType" ADD COLUMN     "comment" TEXT;
