@@ -20,7 +20,6 @@
 		"resolveJsonModule": true,
 		"paths": {
 			"@yarn-monorepo/*": [
-				"packages/frontend/*",
 				"packages/backend/*",
 				"packages/admin/*"
 			]
@@ -29,9 +28,6 @@
 	"references": [
 		{
 			"path": "./packages/backend"
-		},
-		{
-			"path": "./packages/frontend"
 		},
 		{
 			"path": "./packages/admin"

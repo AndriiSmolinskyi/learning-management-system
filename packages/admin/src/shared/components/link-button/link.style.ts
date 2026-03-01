@@ -3,7 +3,7 @@ import {
 } from '@emotion/css'
 import {
 	orbitronRegular,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const linkStyle = css`
 	color: var(--white);

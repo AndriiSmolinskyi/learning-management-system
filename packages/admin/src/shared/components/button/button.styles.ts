@@ -6,7 +6,7 @@ import type {
 } from './button.types'
 import {
 	orbitronSemibold,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const baseStyle = (size: Size,): string => {
 	const sizeMap = {

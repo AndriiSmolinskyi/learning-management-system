@@ -1,12 +1,12 @@
 import React from 'react'
 import type {
 	ButtonProps,
-} from './'
+} from '.'
 import {
 	IconBtn,
 	TextBtn,
 	ButtonType,
-} from './'
+} from '.'
 
 export const Button = <T extends ButtonType>({
 	additionalProps,
