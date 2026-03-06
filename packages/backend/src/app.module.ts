@@ -1,7 +1,7 @@
-import { CustomPrismaModule, PrismaModule, loggingMiddleware, } from 'nestjs-prisma'
+import { PrismaModule, loggingMiddleware, } from 'nestjs-prisma'
 import { Logger, Module, } from '@nestjs/common'
 import { ConfigModule, } from '@nestjs/config'
-import { ScheduleModule, } from '@nestjs/schedule'
+import { AuthModule, } from './modules/auth/auth.module'
 
 @Module({
 	imports:     [
@@ -19,6 +19,7 @@ import { ScheduleModule, } from '@nestjs/schedule'
 				],
 			},
 		},),
+		AuthModule,
 	],
 },)
 
