@@ -1,5 +1,0 @@
-export * from './banks-chart.component'
-export * from './currencies-chart.component'
-export * from './table.component'
-export * from './table-item.component'
-export * from './chart-header.component'

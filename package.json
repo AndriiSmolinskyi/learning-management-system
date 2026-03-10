@@ -1,0 +1,46 @@
+{
+  "name": "ssr-nest-monorepo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "postinstall": "husky install",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable",
+    "frontend:dev": "yarn workspace frontend dev",
+    "backend:dev": "yarn workspace backend start:dev",
+    "admin:dev": "yarn workspace admin dev",
+    "frontend:lint": "yarn workspace frontend lint",
+    "backend:lint": "yarn workspace backend lint",
+    "admin:lint": "yarn workspace admin lint",
+    "frontend:build": "yarn workspace frontend build",
+    "backend:build": "yarn workspace backend build",
+    "admin:build": "yarn workspace admin build",
+    "start": "concurrently --kill-others-on-fail \"yarn frontend:dev\"  \"yarn backend:dev\"  \"yarn admin:dev\"",
+    "prepare": "husky install"
+  },
+  "workspaces": [
+    "packages/frontend",
+    "packages/backend",
+    "packages/admin"
+  ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.0",
+    "pinst": "^3.0.0",
+    "typescript": "<=5.3.3",
+    "typescript-node": "^0.1.3"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.2.0",
+    "concurrently": "^8.0.1"
+  },
+  "resolutions": {
+    ".prisma": "link:node-modules/.prisma"
+  },
+  "packageManager": "yarn@4.5.0"
+}

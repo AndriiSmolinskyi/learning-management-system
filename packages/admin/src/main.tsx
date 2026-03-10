@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client'
 import {
 	Portal,
 } from '@blueprintjs/core'
-import Router from './router/router'
-import ErrorBoundary from './modules/error-boundary/error-boundary'
 import {
 	AdapterDateFns,
 } from '@mui/x-date-pickers/AdapterDateFnsV3'
@@ -36,8 +34,6 @@ import {
 import * as styles from './shared/styles/main'
 
 ReactDOM.createRoot(document.getElementById('root',)!,).render(
-	<ErrorBoundary>
-		<UmamiTracker />
 		<Portal className={styles.portal}>
 			<QueryProvider>
 				<MsalProvider>
@@ -47,12 +43,11 @@ ReactDOM.createRoot(document.getElementById('root',)!,).render(
 							cancelButtonLabel: 'Cancel',
 						}}>
 							<WebSocketProvider>
-								<Router />
+								<div></div>
 							</WebSocketProvider>
 						</LocalizationProvider>
 					</AuthContextProvider>
 				</MsalProvider>
 			</QueryProvider>
 		</Portal>
-	</ErrorBoundary>,
 )
