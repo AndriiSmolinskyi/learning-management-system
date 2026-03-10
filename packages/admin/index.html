@@ -1,13 +1,46 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/public/link-Icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pumppola</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+	<meta charset="UTF-8" />
+	<base href="/" />
+	<link rel="icon" type="image/svg+xml" href="./src/assets/icons/logo-icon.svg" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="color-scheme" content="light" />
+	<meta name="description" content="Project description" />
+	<meta property="og:title" content="Migdal Admin" />
+	<meta property="og:description" content="Project description" />
+	<meta property="og:locale" content="en_EN" />
+	<meta property="og:type" content="website" />
+	<title>Migdal Management Analytics</title>
+</head>
+
+<body>
+	<div id="root"></div>
+	
+	<script>
+      (function () {
+        const handler = (event) => {
+          const message = event?.message || event?.reason?.message || '';
+
+          const isChunkError =
+            message.includes('ChunkLoadError') ||
+            message.includes('Loading chunk') ||
+            message.includes('Failed to fetch dynamically imported module') ||
+            message.includes('Failed to load module script') ||
+            message.includes('text/html');
+
+          if (isChunkError && !sessionStorage.getItem('reloaded_after_deploy')) {
+            sessionStorage.setItem('reloaded_after_deploy', 'true');
+            location.reload();
+          }
+        };
+
+        window.addEventListener('error', handler);
+        window.addEventListener('unhandledrejection', handler);
+      })();
+    </script>
+	<script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

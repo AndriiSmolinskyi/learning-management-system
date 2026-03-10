@@ -1,0 +1,7 @@
+export * from './add-footer.component'
+export * from './add-header.component'
+export * from './exit-modal.component'
+export * from './first-step.component'
+export * from './second-step.component'
+export * from './account-collapse.component'
+export * from './third-step.component'

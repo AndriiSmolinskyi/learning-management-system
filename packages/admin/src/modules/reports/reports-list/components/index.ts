@@ -1,0 +1,6 @@
+export * from './reports-header.component'
+export * from './reports-table.component'
+export * from './add-report-dialog.component'
+export * from './success-create-dialog.component'
+export * from './report-details.component'
+export * from './report-details-pdf.component'

@@ -1,22 +1,35 @@
 import * as React from 'react'
 import {
-	BrowserRouter, Routes, Route,
+	BrowserRouter,
+	Routes,
 } from 'react-router-dom'
-import {
-	RouterKeys,
-} from './keys'
 
-const Token = React.lazy(async() => {
-	return import('../modules/token/token.component')
-},)
+import {
+	Loader,
+} from '../shared/components'
+
+import {
+	useAuth,
+} from '../shared/hooks/use-auth.hook'
+
+import {
+	privateRoutes,
+	publicRoutes,
+} from './routes'
 
 const Router: React.FunctionComponent = () => {
+	const {
+		isAuth,
+	} = useAuth()
 	return (
 		<BrowserRouter>
-			<React.Suspense>
+			<React.Suspense fallback={<Loader />}>
 				<Routes>
-					<Route path= { RouterKeys.ALL_MATCH } element = {< Token />} />
-					<Route path={RouterKeys.ROOT} element={<Token />} />
+					{
+						isAuth ?
+							privateRoutes :
+							publicRoutes
+					}
 				</Routes>
 			</React.Suspense>
 		</BrowserRouter>

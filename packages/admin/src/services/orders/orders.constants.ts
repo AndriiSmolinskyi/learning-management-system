@@ -1,0 +1,16 @@
+export const OrderRoutes = {
+	MODULE:         'order',
+	CREATE:         'create',
+	LIST:           'list',
+	UPDATE_STATUS:  'update-status',
+	DRAFT_CREATE:   'draft/create',
+	DRAFT_LIST:     'draft/list',
+	UPDATE:         'update',
+	DELETE_DETAILS: 'delete-details',
+	FILTER:         'filter',
+	ORDER:          'order',
+	DRAFT_DELETE:   'draft/delete',
+	ASSETS:         'assets',
+	DRAFT_UPDATE:   'draft/update',
+	UNITS:          'units',
+}

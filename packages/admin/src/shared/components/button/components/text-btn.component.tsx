@@ -25,7 +25,7 @@ export const TextBtn: React.FC<ButtonProps<ButtonType.TEXT>> = ({
 },) => {
 	const {
 		size = Size.MEDIUM,
-		color = Color.MAIN_COLOR,
+		color = Color.BLUE,
 		text,
 		leftIcon,
 		rightIcon,

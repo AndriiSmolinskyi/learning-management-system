@@ -7,7 +7,19 @@ export enum Size {
 }
 
 export enum Color {
-	MAIN_COLOR = 'mainColor',
+  BLUE = 'blue',
+  RED = 'red',
+  GREEN = 'green',
+  MICRO = 'micro',
+  NONE = 'none',
+  SECONDRAY_GRAY = 'secondaryGrey',
+  NON_OUT_BLUE = 'nonOutBlue',
+  SECONDRAY_COLOR = 'secondaryColor',
+  SECONDARY_GREEN = 'secondaryGreen',
+  SECONDARY_RED = 'secondaryRed',
+  NON_OUT_RED = 'nonOutRed',
+	NON_OUT_GREEN = 'nonOutGreen',
+	TERTIARY_GREY = 'tertiaryGray',
 }
 
 export enum ButtonType {

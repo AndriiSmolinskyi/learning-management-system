@@ -1,0 +1,10 @@
+{{define "content" -}}
+    <div class="content-container">
+    {{range $index, $item:=.}}
+        <div class="icon-container">
+            <img class="image" src="{{$item.Path}}">
+            <h3 class="title">{{$item.Name}} - {{$item.Size}}kb</h3>
+        </div>
+    {{end}}
+    </div>
+{{end}}

@@ -1,27 +1,28 @@
 /* eslint-disable no-unused-expressions */
 import {
 	injectGlobal,
+	css,
 } from '@emotion/css'
+
 import {
-	orbitronRegular,
+	montserratRegular,
 } from './fonts'
 
 injectGlobal`
 	html, body {
-		height: 100vh;
-		background-color: var(--black);
+		height: 100%;
 	}
 
 	body {
 		line-height: 1.5;
 		-webkit-font-smoothing: antialiased;
+		overflow: hidden;
 	}
 
-	#root, :root {
+	:root {
 		width: 100%;
-		height: 100vh;
 		isolation: isolate;
-		/* background-color: var(--gray-700); */
+		position: relative;
 	}
 
 	*, *::before, *::after {
@@ -37,16 +38,16 @@ injectGlobal`
 		max-width: 100%;
 	}
 
-	p, h1, h2, h3, h4, h5, h6, a, {
-		${orbitronRegular(12,)}
+	p, h1, h2, h3, h4, h5, h6 {
+		${montserratRegular}
 		overflow-wrap: break-word;
 		margin-bottom: 0 !important;
-		color: var(--white);
+		color: var(--reverted-accent-color);
 	}
-
+	
 	input, button, textarea, select {
-		${orbitronRegular(12,)}
 		padding: 0;
+		${montserratRegular}
 	}
 
 	button {
@@ -58,15 +59,11 @@ injectGlobal`
 		width: 1px;
 		height: 1px;
 		margin: -1px;
-		border: 0;
+		border: none;
 		padding: 0;
 		clip: rect(0 0 0 0);
 		overflow: hidden;
 	}
-
-	*:active {
-		cursor: url('../../../src/assets/icons/cursor-click.svg'), pointer;
-   }
 
 	.bp5-portal {
 		outline: none !important;
@@ -74,12 +71,28 @@ injectGlobal`
 			outline: none !important;
 		}
 	}
-/* 
-	[data-theme="dark"] .bp5-drawer-header > button > svg > path {
-		fill: var(--base-white);
-	}
 
-	[data-theme="light"] .bp5-drawer-header > button > svg > path {
-		fill: var(--gray-600);
-	} */
+	input[type='date']::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+	}
+.bp5-popover2,
+.bp5-popover2-content {
+  z-index: 9999 !important;
+}
+   *:active {
+		cursor: url('../../../src/assets/icons/cursor-click.svg'), pointer;
+   }
+`
+
+export const portal = css`
+	height: 100vh;
 `

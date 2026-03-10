@@ -22,15 +22,15 @@ export default ({
 	}
 
 	return defineConfig({
-		base:   './',
+		base:   '/',
 		server: {
 			host: '0.0.0.0',
-			port: parseInt(process.env['VITE_PORT'] ?? '3000',),
+			port: parseInt(process.env['VITE_PORT'] ?? '4000',),
 		},
 		assetsInclude: ['**/*.xlsx', '**/*.xls', '**/*.csv',],
 		preview:       {
 			host: '0.0.0.0',
-			port: parseInt(process.env['VITE_PORT'] ?? '3000',),
+			port: parseInt(process.env['VITE_PORT'] ?? '4000',),
 		},
 		build: {
 			target: 'es2020',
