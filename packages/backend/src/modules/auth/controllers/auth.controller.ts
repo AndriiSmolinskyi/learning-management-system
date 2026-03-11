@@ -44,9 +44,9 @@ export class AuthController {
 	@Public()
 	@Get(AuthRoutes.CHECK,)
 	public async check(
-		@Req() req: Request,
-		@Res({ passthrough: true, },) res: Response,
-		@Query() query: CheckDto,
+	@Req() req: Request,
+	@Res({ passthrough: true, },) res: Response,
+	@Query() query: CheckDto,
 	): Promise<AuthCheckReturn> {
 		return this.authService.check(res, req, query.portal,)
 	}

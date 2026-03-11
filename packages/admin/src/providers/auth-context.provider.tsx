@@ -1,75 +1,120 @@
-import React from 'react'
-import {
-	useIsAuthenticated,
-} from '@azure/msal-react'
+import * as React from 'react'
 
 import {
 	authService,
-} from '../services/auth'
-import {
-	storageService,
-	STORAGE_KEYS,
-} from '../services/storage'
+} from '../services/auth/auth.service'
 
-export interface IAuthContextValue {
-  isAuth: boolean;
-  setIsAuth: (authStatus: boolean) => void;
-  checkAuth: () => Promise<void>
+import type {
+	LoginBody,
+} from '../shared/types'
+
+type AuthRole = 'ADMIN' | 'STUDENT'
+
+type AuthStatus = 'loading' | 'guest' | 'authed'
+
+type AuthContextValue = {
+	status: AuthStatus
+	isLoading: boolean
+	isAuth: boolean
+	role: AuthRole | null
+
+	check: () => Promise<void>
+	login: (body: Omit<LoginBody, 'portal'>,) => Promise<void>
+	logout: () => Promise<void>
 }
 
-export const AuthContext = React.createContext<IAuthContextValue | undefined>(undefined,)
+const AuthContext = React.createContext<AuthContextValue | null>(null,)
 
-interface IProps {
-	children: React.ReactNode;
+const PORTAL: AuthRole = 'ADMIN'
+
+type Props = {
+	children: React.ReactNode
 }
 
-export const AuthContextProvider: React.FC<IProps> = ({
+export const AuthContextProvider: React.FC<Props> = ({
 	children,
 },) => {
-	const [isFirstRender, setIsFirstRender,] = React.useState<boolean>(true,)
-	const isAuthenticated = useIsAuthenticated()
-	const storageAuth = storageService.getItem(STORAGE_KEYS.AUTH,)
-	const [isAuth, setIsAuth,] = React.useState<boolean>(Boolean(storageAuth,),)
+	const [status, setStatus,] = React.useState<AuthStatus>('loading',)
+	const [role, setRole,] = React.useState<AuthRole | null>(null,)
 
-	const checkAuth = React.useCallback(async(isAuthenticated?: boolean,): Promise<void> => {
+	const isLoading = status === 'loading'
+	const isAuth = status === 'authed'
+
+	const check = React.useCallback(async(): Promise<void> => {
+		setStatus('loading',)
+
 		try {
-			const {
-				auth,
-			} = await authService.check()
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			const result = await authService.check(`${PORTAL}` as any,)
 
-			const value = isAuthenticated === undefined ?
-				auth :
-				(auth && isAuthenticated)
-
-			storageService.setItem(STORAGE_KEYS.AUTH, value,)
-			if (!value) {
-				storageService.setItem(STORAGE_KEYS.ROLES, [],)
+			if (result.auth) {
+				setRole((result.role as AuthRole),)
+				setStatus('authed',)
+				return
 			}
-			setIsAuth(value,)
-		} catch (error) {
-			storageService.setItem(STORAGE_KEYS.ROLES, [],)
-			storageService.setItem(STORAGE_KEYS.AUTH, false,)
-			setIsAuth(false,)
+
+			setRole(null,)
+			setStatus('guest',)
+		} catch {
+			setRole(null,)
+			setStatus('guest',)
 		}
 	}, [],)
 
-	const value: IAuthContextValue = {
-		isAuth,
-		setIsAuth,
-		checkAuth,
-	}
+	const login = React.useCallback(async(body: Omit<LoginBody, 'portal'>,): Promise<void> => {
+		await authService.login({
+			...body,
+			portal: PORTAL,
+		} as LoginBody,)
 
-	React.useLayoutEffect(() => {
-		if (isFirstRender) {
-			setIsFirstRender(false,)
-			return
+		await check()
+	}, [check,],)
+
+	const logout = React.useCallback(async(): Promise<void> => {
+		try {
+			// await authService.logout?.()
+		} finally {
+			setRole(null,)
+			setStatus('guest',)
 		}
-		checkAuth(isAuthenticated,)
-	}, [isAuthenticated,],)
+	}, [],)
+
+	React.useEffect(() => {
+		check()
+	}, [check,],)
+
+	const value = React.useMemo<AuthContextValue>(() => {
+		return {
+			status,
+			isLoading,
+			isAuth,
+			role,
+
+			check,
+			login,
+			logout,
+		}
+	}, [
+		status,
+		isLoading,
+		isAuth,
+		role,
+		check,
+		login,
+		logout,
+	],)
 
 	return (
 		<AuthContext.Provider value={value}>
 			{children}
 		</AuthContext.Provider>
 	)
+}
+
+export const useAuth = (): AuthContextValue => {
+	const ctx = React.useContext(AuthContext,)
+	if (!ctx) {
+		throw new Error('useAuth must be used within AuthContextProvider',)
+	}
+	return ctx
 }

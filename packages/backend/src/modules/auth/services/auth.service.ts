@@ -25,8 +25,8 @@ const PORTAL_ROLE: Record<AuthPortal, Role> = {
 @Injectable()
 export class AuthService {
 	constructor(
-		private readonly prismaService: PrismaService,
-		private readonly jwtService: JWTService,
+			private readonly prismaService: PrismaService,
+			private readonly jwtService: JWTService,
 	) {}
 
 	public async login(res: Response, body: LoginDto,): Promise<LoginReturn> {
