@@ -37,12 +37,6 @@ export const Input = React.forwardRef<HTMLInputElement, IInputProps>(({
 	...rest
 }, ref,) => {
 	const isError = Boolean(error,) && Boolean(touched,)
-	// const formatNumber = (value: string,): string => {
-	// 	if (isNumber) {
-	// 		return value.replace(/\B(?=(\d{3})+(?!\d))/g, ',',)
-	// 	}
-	// 	return value
-	// }
 
 	const formatNumber = (value: string,): string => {
 		if (!isNumber) {
@@ -58,44 +52,6 @@ export const Input = React.forwardRef<HTMLInputElement, IInputProps>(({
 			`${formattedInteger}.${decimalPart}`
 	}
 
-	// const handleChange = (e: React.ChangeEvent<HTMLInputElement>,): void => {
-	// 	let formattedValue = e.target.value.replace(/,/g, '',)
-
-	// 	if (formattedValue === '-0') {
-	// 		formattedValue = ''
-	// 	}
-
-	// 	if (isNumber && formattedValue) {
-	// 		if (!isNegative && formattedValue.startsWith('-',)) {
-	// 			formattedValue = formattedValue.slice(1,)
-	// 		}
-
-	// 		if ((/^0+[^\.]/).test(formattedValue,)) {
-	// 			formattedValue = formattedValue.replace(/^0+/, '',)
-	// 		}
-	// 	}
-
-	// 	if (isNumber) {
-	// 		const [integerPart, decimalPart,] = formattedValue.split('.',)
-	// 		if (decimalPart && decimalPart.length > 3) {
-	// 			formattedValue = `${integerPart}.${decimalPart.slice(0, 3,)}`
-	// 		}
-	// 	}
-
-	// 	if (formattedValue === '0.') {
-	// 		formattedValue = '0.'
-	// 	}
-
-	// 	if (input?.onChange) {
-	// 		input.onChange({
-	// 			...e,
-	// 			target: {
-	// 				...e.target,
-	// 				value: formattedValue,
-	// 			},
-	// 		},)
-	// 	}
-	// }
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>,): void => {
 		let formattedValue = e.target.value.replace(/,/g, '',)
 

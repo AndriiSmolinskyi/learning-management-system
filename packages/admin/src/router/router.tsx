@@ -18,7 +18,7 @@ import {
 
 const Router: React.FunctionComponent = () => {
 	const {
-		isAuth, isLoading,
+		isAuth,
 	} = useAuth()
 
 	return (

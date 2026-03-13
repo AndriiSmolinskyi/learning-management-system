@@ -1,7 +1,6 @@
 import * as React from 'react'
 import {
 	Navigate,
-	Outlet,
 	Route,
 } from 'react-router-dom'
 
@@ -10,10 +9,10 @@ import {
 } from './keys'
 
 const Login = React.lazy(async() => {
-	return import('../modules/auth/login.component')
+	return import('../modules/auth/components/login.component')
 },)
 const Home = React.lazy(async() => {
-	return import('../modules/auth/login.component')
+	return import('../modules/home/home.component')
 },)
 
 export const publicRoutes = (

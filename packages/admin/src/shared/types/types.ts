@@ -1,3 +1,7 @@
+import type {
+	MultiValue, SingleValue,
+} from 'react-select'
+
 export type TExcelSheetType = Array<Array<string | number | Date>>
 
 export enum AuthPortal {
@@ -25,3 +29,18 @@ export type AuthCheckReturn = {
 	role?: Role
 	userId?: string
 }
+
+export interface IOptionType<T = string> {
+	label: string
+	value: T
+}
+
+export type SelectOptionType = {
+	id: string
+	name: string
+}
+
+export type SelectValueType<T = string> =
+	SingleValue<IOptionType<T>> |
+	MultiValue<IOptionType<T>> |
+	undefined

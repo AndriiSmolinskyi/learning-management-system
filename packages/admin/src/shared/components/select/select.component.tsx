@@ -23,9 +23,6 @@ import {
 import {
 	CreatebleSelectEnum,
 } from '../../../shared/constants/createble-select.constants'
-import {
-	TransactionTypeAuditType,
-} from '../../../shared/types'
 import type {
 	IOptionType, SelectValueType,
 } from '../../../shared/types'
@@ -171,44 +168,15 @@ export function SelectComponent<T = string>({
 		return (
 
 			<>
-				{isAudit ?
-					(
-						auditBadge(String(data.label,),)
-					) :
-					(
-						<div className={styles.customMultiSelectItem}>
-							<span className={styles.multiValueText}>{data.label}</span>
-							<span {...removeProps}>
-								<XmarkSecond className={styles.customMultiSelectItemBtn} />
-							</span>
-						</div>
-					)}
+				<div className={styles.customMultiSelectItem}>
+					<span className={styles.multiValueText}>{data.label}</span>
+					<span {...removeProps}>
+						<XmarkSecond className={styles.customMultiSelectItemBtn} />
+					</span>
+				</div>
 			</>
 
 		)
-	}
-
-	const auditBadge = (label: string,): React.ReactNode => {
-		let badgeClass: string | undefined
-
-		switch (label as unknown as TransactionTypeAuditType) {
-		case TransactionTypeAuditType.ADDED:
-		case TransactionTypeAuditType.RELATION:
-		case TransactionTypeAuditType.RESTORED:
-			badgeClass = styles.auditFirst
-			break
-		case TransactionTypeAuditType.EDITED:
-			badgeClass = styles.auditSecond
-			break
-		case TransactionTypeAuditType.ARCHIVED:
-		case TransactionTypeAuditType.DELETED:
-			badgeClass = styles.auditThird
-			break
-		default:
-			badgeClass = undefined
-		}
-
-		return <p className={cx(styles.infoBadge, badgeClass,)}>{label}</p>
 	}
 
 	const CustomSingleValue = (
@@ -240,31 +208,6 @@ export function SelectComponent<T = string>({
 		)
 	}
 
-	const AuditFilter = (props: IOptionType<T>,): React.ReactNode => {
-		const {
-			label,
-		} = props
-
-		let badgeClass
-		if (label === TransactionTypeAuditType.ADDED) {
-			badgeClass = styles.auditFirst
-		} else if (label === TransactionTypeAuditType.ARCHIVED) {
-			badgeClass = styles.auditThird
-		} else if (label === TransactionTypeAuditType.DELETED) {
-			badgeClass = styles.auditThird
-		} else if (label === TransactionTypeAuditType.EDITED) {
-			badgeClass = styles.auditSecond
-		} else if (label === TransactionTypeAuditType.RELATION) {
-			badgeClass = styles.auditFirst
-		} else if (label === TransactionTypeAuditType.RESTORED) {
-			badgeClass = styles.auditFirst
-		}
-
-		return (
-			<p className={cx(styles.infoBadge, badgeClass,)}>{label}</p>
-		)
-	}
-
 	return (
 		<Select
 			isClearable={isClearable}
@@ -287,11 +230,9 @@ export function SelectComponent<T = string>({
 				setMenuIsOpen(false,)
 			}}
 			formatOptionLabel={
-				isAudit ?
-					AuditFilter :
-					isBadges ?
-						BadgesOption :
-						undefined
+				isBadges ?
+					BadgesOption :
+					undefined
 			}
 
 			components={{
