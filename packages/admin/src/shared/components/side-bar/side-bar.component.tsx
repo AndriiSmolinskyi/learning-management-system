@@ -7,15 +7,9 @@ import {
 import {
 	cx,
 } from '@emotion/css'
-
 import {
-	Bell,
-	Book,
-	Briefcase,
 	Coins,
-	Folder,
 	Home,
-	Wallet,
 } from '../../../assets/icons'
 import {
 	Button,
@@ -27,17 +21,8 @@ import {
 	Tooltip,
 } from '../tooltip'
 import {
-	ClientsButton,
-	OperationsButton,
-	ProfileButton,
-} from './components/nav-buttons'
-
-import {
 	RouterKeys,
 } from '../../../router/keys'
-import {
-	useSignOut,
-} from '../../../modules/auth/hooks'
 
 import {
 	buttonWrapper,
@@ -46,46 +31,26 @@ import {
 	sidebarBtn,
 } from './side-bar.styles'
 import {
-	useUserStore,
-} from '../../../store/user.store'
+	ProfileButton,
+} from './components/nav-buttons'
 import {
-	Roles,
-} from '../../../shared/types'
-import {
-	useCustomReportStore,
-} from '../../../modules/reports/custom-report/custom-report.store'
-import {
-	SettingsButton,
-} from './components/nav-buttons/settings-button.component'
+	useAuth,
+} from '../../../providers/auth-context.provider'
 import * as styles from './side-bar.styles'
 
 export const SideBar: React.FC = () => {
-	const [isAnalytic, setAnalytic,] = React.useState<boolean>(false,)
-
 	const navigate = useNavigate()
 	const location = useLocation()
 	const profileRef = React.useRef(null,)
-	const docsRef = React.useRef(null,)
-	const {
-		handleSignOut,
-	} = useSignOut()
-	const {
-		userInfo,
-	} = useUserStore()
-	const {
-		resetCustomReportStore,
-	} = useCustomReportStore()
 
-	React.useEffect(() => {
-		const hasPermission = userInfo.roles.some((role,) => {
-			return [Roles.INVESTMEN_ANALYST,].includes(role,)
-		},)
-		if (hasPermission) {
-			setAnalytic(true,)
-		} else {
-			setAnalytic(false,)
-		}
-	}, [userInfo, setAnalytic,],)
+	const {
+		logout,
+	} = useAuth()
+
+	const handleSignOut = React.useCallback(async(): Promise<void> => {
+		await logout()
+		navigate(RouterKeys.LOGIN,)
+	}, [logout, navigate,],)
 
 	return (
 		<aside ref={profileRef}>
@@ -95,104 +60,25 @@ export const SideBar: React.FC = () => {
 					profileRef={profileRef}
 				/>
 				<div className={buttonWrapper}>
-					<Tooltip text='Analytics'>
+					<Tooltip text='Home'>
 						<Button<ButtonType.ICON>
-							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.ANALYTICS,) && currentBtn,)}
+							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.HOME,) && currentBtn,)}
+							onClick={() => {
+								navigate(RouterKeys.HOME,)
+							}}
 							additionalProps={{
 								icon:    <Home width={20} height={20}/>,
 								btnType:  ButtonType.ICON,
 								size:     Size.MEDIUM,
 								color:    Color.MICRO,
 							}}
-							onClick={() => {
-								navigate(RouterKeys.ANALYTICS_OVERVIEW,)
-							}}
 						/>
 					</Tooltip>
-					<Tooltip text='Notifications'>
+					<Tooltip text='Students'>
 						<Button<ButtonType.ICON>
-							className={sidebarBtn}
-							additionalProps={{
-								icon:    <Bell width={20} height={20}/>,
-								btnType:  ButtonType.ICON,
-								size:     Size.MEDIUM,
-								color:    Color.MICRO,
-							}}
-						/>
-					</Tooltip>
-				</div>
-				<div className={buttonWrapper}>
-					{!isAnalytic && <ClientsButton
-						current={
-							location.pathname.includes(RouterKeys.CLIENTS,) ||
-							location.pathname.includes(RouterKeys.PORTFOLIO,)
-						}
-					/>}
-					{isAnalytic && <Tooltip text='Portfolio'>
-						<Button<ButtonType.ICON>
-							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.PORTFOLIO,) && currentBtn,)}
-							additionalProps={{
-								icon:    <Briefcase width={20} height={20} />,
-								btnType:  ButtonType.ICON,
-								size:     Size.MEDIUM,
-								color:    Color.MICRO,
-							}}
+							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.STUDENTS,) && currentBtn,)}
 							onClick={() => {
-								navigate(RouterKeys.PORTFOLIO,)
-							}}
-						/>
-					</Tooltip>}
-					<OperationsButton
-						current={location.pathname.includes(RouterKeys.OPERATIONS,)}
-					/>
-				</div>
-				<div className={buttonWrapper} ref={docsRef}>
-					{!isAnalytic && <Tooltip text='Payments'>
-						<Button<ButtonType.ICON>
-							className={sidebarBtn}
-							additionalProps={{
-								icon:    <Wallet width={20} height={20}/>,
-								btnType:  ButtonType.ICON,
-								size:     Size.MEDIUM,
-								color:    Color.MICRO,
-							}}
-						/>
-					</Tooltip>}
-					<Tooltip text='Reports'>
-						<Button<ButtonType.ICON>
-							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.REPORTS,) && currentBtn,)}
-							additionalProps={{
-								icon:    <Book width={20} height={20}/>,
-								btnType:  ButtonType.ICON,
-								size:     Size.MEDIUM,
-								color:    Color.MICRO,
-							}}
-							onClick={() => {
-								navigate(RouterKeys.REPORTS, {
-									state: null,
-								},)
-								resetCustomReportStore()
-							}}
-						/>
-					</Tooltip>
-					<Tooltip text='Documents'>
-						<Button<ButtonType.ICON>
-							className={sidebarBtn}
-							additionalProps={{
-								icon:    <Folder width={20} height={20}/>,
-								btnType:  ButtonType.ICON,
-								size:     Size.MEDIUM,
-								color:    Color.MICRO,
-							}}
-						/>
-					</Tooltip>
-				</div>
-				<div className={buttonWrapper}>
-					{!isAnalytic && <Tooltip text='Budget managment'>
-						<Button<ButtonType.ICON>
-							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.BUDGET_MANAGMENT,) && currentBtn,)}
-							onClick={() => {
-								navigate(RouterKeys.BUDGET_MANAGMENT,)
+								navigate(RouterKeys.STUDENTS,)
 							}}
 							additionalProps={{
 								icon:    <Coins width={20} height={20}/>,
@@ -201,12 +87,12 @@ export const SideBar: React.FC = () => {
 								color:    Color.MICRO,
 							}}
 						/>
-					</Tooltip>}
+					</Tooltip>
 				</div>
 				<div className={styles.buttonWrapperDown}>
-					<SettingsButton
-						current={location.pathname.includes(RouterKeys.SETTINGS,)}
-					/>
+					{/* <SettingsButton
+						current={location.pathname.includes(RouterKeys.HOME,)}
+					/> */}
 				</div>
 
 			</div>

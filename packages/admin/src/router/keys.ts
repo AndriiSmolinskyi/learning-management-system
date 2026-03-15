@@ -16,4 +16,6 @@ export class RouterKeys {
 	// private routes
 
 	public static HOME = '/home'
+
+	public static STUDENTS = '/students'
 }

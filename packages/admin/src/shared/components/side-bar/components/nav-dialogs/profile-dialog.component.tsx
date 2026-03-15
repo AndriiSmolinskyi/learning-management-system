@@ -23,9 +23,6 @@ import {
 import {
 	getAvatar,
 } from '../../utils'
-import {
-	ROLES_NAMES,
-} from '../../../../constants'
 
 import {
 	avatar,
@@ -38,19 +35,8 @@ import {
 	profileDialogContainer,
 	versionStyle,
 	bottomBlock,
-	clearCacheWrapper,
 	hoverZone,
 } from './dialog.styles'
-import {
-	Button, ButtonType, Color, Size,
-} from '../../../../../shared/components/button'
-import {
-	useGetRedisCacheCleared,
-} from '../../../../hooks'
-import {
-	Roles,
-} from '../../../../../shared/types'
-
 interface IProps {
 	children: React.ReactNode
 	onButtonClick: () => void
@@ -64,8 +50,6 @@ export const ProfileDialog: React.FC<IProps> = ({
 	popoverRef,
 	toggleOpen,
 },) => {
-	const [isAllowed, setIsAllowed,] = React.useState(false,)
-
 	const {
 		userInfo,
 	} = useUserStore()
@@ -74,18 +58,6 @@ export const ProfileDialog: React.FC<IProps> = ({
 		setVisible,
 	} = useBackdrop()
 
-	const {
-		mutateAsync: clearRedisCache,
-		isPending,
-	} = useGetRedisCacheCleared()
-	React.useEffect(() => {
-		const hasPermission = userInfo.roles.some((role,) => {
-			return [Roles.FAMILY_OFFICE_MANAGER,].includes(role,)
-		},)
-		if (hasPermission) {
-			setIsAllowed(true,)
-		}
-	}, [userInfo.roles,],)
 	const content = (
 		<div className={profileDialogContainer}>
 			<button
@@ -107,7 +79,7 @@ export const ProfileDialog: React.FC<IProps> = ({
 				userInfo.roles.map((role,) => {
 					return (
 						<div key={role} className={roleStyle}>
-							<p>{ROLES_NAMES[role]}</p>
+							<p>{userInfo.roles}</p>
 							<span/>
 						</div>
 					)
@@ -123,23 +95,8 @@ export const ProfileDialog: React.FC<IProps> = ({
 			</button>
 			<div className={cx(bottomBlock, hoverZone,)}>
 				<p className={versionStyle}>
-					Version 4.0.7 from 06.01.2026
+					Version 0.0.1 from 16.03.2026
 				</p>
-				<div className={cx(clearCacheWrapper, 'clearCache',)}>
-					{isAllowed && <Button<ButtonType.TEXT>
-						onClick={async(e,) => {
-							e.stopPropagation()
-							await clearRedisCache()
-						}}
-						disabled={isPending}
-						additionalProps={{
-							btnType: ButtonType.TEXT,
-							text:    'Clear cache',
-							size:    Size.SMALL,
-							color:   Color.BLUE,
-						}}
-					/>}
-				</div>
 			</div>
 		</div>)
 

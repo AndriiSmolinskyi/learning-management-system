@@ -72,7 +72,7 @@ export const AuthContextProvider: React.FC<Props> = ({
 
 	const logout = React.useCallback(async(): Promise<void> => {
 		try {
-			// await authService.logout?.()
+			await authService.logout()
 		} finally {
 			setRole(null,)
 			setStatus('guest',)
