@@ -31,13 +31,20 @@ import type {
 import {
 	validateLoginForm,
 } from '../utils/login.validate'
+import {
+	useAuth,
+} from '../../../providers/auth-context.provider'
+import * as styles from '../auth.styles'
 
 export const Login: React.FC = () => {
 	const {
-		mutate,
+		mutateAsync: login,
 		isPending,
 		error,
 	} = useLogin()
+	const {
+		check,
+	} = useAuth()
 
 	const handleSubmit = async(values: ILoginFormValues,): Promise<void> => {
 		const body: LoginBody = {
@@ -46,71 +53,82 @@ export const Login: React.FC = () => {
 			portal:   AuthPortal.ADMIN,
 		}
 
-		mutate(body,)
+		await login(body,)
+		await check()
 	}
 
 	return (
-		<div>
-			<h2>Admin login</h2>
+		<div className={styles.container}>
+			<div className={styles.modal}>
+				<div className={styles.textBlock}>
+					<h2 className={styles.titleModal}>
+						<span>Welcome to</span>
+						<span className={styles.titleModalMig}>Cross-platform LMS</span>
+					</h2>
+					<p className={styles.underTitleModal}>Welcome back! Please enter your details.</p>
+				</div>
 
-			<Form<ILoginFormValues>
-				onSubmit={handleSubmit}
-				validate={validateLoginForm}
-				initialValues={{
-					email:    '',
-					password: '',
-				}}
-				render={({
-					handleSubmit,
-					valid,
-					touched,
-					errors,
-				},) => {
-					return (
-						<form>
-							<div>
-								<FormField
-									name='email'
-									placeholder='Enter email'
-									leftIcon={<Mail />}
-								/>
-								{errors?.['email'] && touched?.['email'] && (
-									<p>{errors['email']}</p>
+				<Form<ILoginFormValues>
+					onSubmit={handleSubmit}
+					validate={validateLoginForm}
+					initialValues={{
+						email:    '',
+						password: '',
+					}}
+					render={({
+						handleSubmit,
+						valid,
+						touched,
+						errors,
+					},) => {
+						return (
+							<form>
+								<div className={styles.inputBlock}>
+									<div>
+										<FormField
+											name='email'
+											placeholder='Enter email'
+											leftIcon={<Mail />}
+										/>
+										{errors?.['email'] && touched?.['email'] && (
+											<p className={styles.error}>{errors['email']}</p>
+										)}
+									</div>
+
+									<div>
+										<FormField
+											name='password'
+											placeholder='Enter password'
+											type='password'
+										/>
+										{errors?.['password'] && touched?.['password'] && (
+											<p className={styles.error}>{errors['password']}</p>
+										)}
+									</div>
+								</div>
+								{error && (
+									<p className={styles.error}>Incorrect email or password</p>
 								)}
-							</div>
 
-							<div>
-								<FormField
-									name='password'
-									placeholder='Enter password'
-									type='password'
+								<Button<ButtonType.TEXT>
+									onClick={handleSubmit}
+									type='submit'
+									disabled={!valid || isPending}
+									className={styles.submitButton}
+									additionalProps={{
+										btnType: ButtonType.TEXT,
+										size:    Size.MEDIUM,
+										text:    isPending ?
+											'Logging in...' :
+											'Log in',
+										color:   Color.BLUE,
+									}}
 								/>
-								{errors?.['password'] && touched?.['password'] && (
-									<p>{errors['password']}</p>
-								)}
-							</div>
-
-							{error && (
-								<p>Incorrect email or password</p>
-							)}
-
-							<Button<ButtonType.TEXT>
-								onClick={handleSubmit}
-								type='submit'
-								disabled={!valid || isPending}
-								additionalProps={{
-									btnType: ButtonType.TEXT,
-									size:    Size.MEDIUM,
-									text:    isPending ?
-										'Logging in...' :
-										'Log in',
-									color:   Color.BLUE,
-								}}
-							/>
-						</form>
-					)
-				}}
-			/>
+							</form>
+						)
+					}}
+				/>
+			</div>
 		</div>
 	)
 }

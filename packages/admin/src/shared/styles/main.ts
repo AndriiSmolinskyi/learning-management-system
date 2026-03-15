@@ -17,6 +17,7 @@ injectGlobal`
 		line-height: 1.5;
 		-webkit-font-smoothing: antialiased;
 		overflow: hidden;
+		background-color: var(--primary-100);
 	}
 
 	:root {
