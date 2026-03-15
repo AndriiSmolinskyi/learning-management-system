@@ -5,7 +5,15 @@ import type {
 	HttpService,
 } from '../../shared/services/http.service'
 import type {
-	LoginBody, LoginReturn, AuthCheckReturn,
+	LoginBody,
+	LoginReturn,
+	AuthCheckReturn,
+	AuthPortal,
+	ForgotPasswordBody,
+	ForgotPasswordReturn,
+	ResetPasswordBody,
+	ResetPasswordReturn,
+	LogoutReturn,
 } from '../../shared/types'
 
 class AuthService {
@@ -19,11 +27,21 @@ class AuthService {
 		return this.httpService.post(`${this.module}/login`, body,)
 	}
 
-	// public async check(): Promise<AuthCheckReturn> {
-	// 	return this.httpService.get(`${this.module}/check`,)
-	// }
-	public async check(portal: 'ADMIN' | 'STUDENT',): Promise<AuthCheckReturn> {
+	public async check(portal: AuthPortal,): Promise<AuthCheckReturn> {
 		return this.httpService.get(`${this.module}/check?portal=${portal}`,)
+	}
+
+	public async forgotPassword(body: ForgotPasswordBody,): Promise<ForgotPasswordReturn> {
+		return this.httpService.post(`${this.module}/forgot-password`, body,)
+	}
+
+	public async resetPassword(body: ResetPasswordBody,): Promise<ResetPasswordReturn> {
+		return this.httpService.post(`${this.module}/reset-password`, body,)
+	}
+
+	public async logout(): Promise<LogoutReturn> {
+		return this.httpService.post(`${this.module}/logout`, {
+		},)
 	}
 }
 

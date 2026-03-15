@@ -22,5 +22,10 @@ export default function checkEnv(): void {
 
 		REDIS_HOST: str(),
 		REDIS_PORT: num(),
+
+		MAILGUN_API_KEY:        str(),
+		MAILGUN_SENDER_ADDRESS: str(),
+		MAILGUN_DOMAIN:         str(),
+		MAILGUN_BASE_URL:       str(),
 	},)
 }

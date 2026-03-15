@@ -10,8 +10,12 @@ export enum AuthPortal {
 }
 
 enum Role {
-   STUDENT = 'STUDENT',
-   ADMIN = 'ADMIN'
+	STUDENT = 'STUDENT',
+	ADMIN = 'ADMIN',
+}
+
+export type OkResponse = {
+	ok: true
 }
 
 export type LoginBody = {
@@ -20,9 +24,7 @@ export type LoginBody = {
 	portal: AuthPortal
 }
 
-export type LoginReturn = {
-	ok: true
-}
+export type LoginReturn = OkResponse
 
 export type AuthCheckReturn = {
 	auth: boolean
@@ -34,6 +36,24 @@ export interface IOptionType<T = string> {
 	label: string
 	value: T
 }
+
+export type ForgotPasswordBody = {
+	email: string
+	portal: AuthPortal
+}
+
+export type ForgotPasswordReturn = OkResponse
+
+export type ResetPasswordBody = {
+	email: string
+	portal: AuthPortal
+	token: string
+	newPassword: string
+}
+
+export type ResetPasswordReturn = OkResponse
+
+export type LogoutReturn = OkResponse
 
 export type SelectOptionType = {
 	id: string

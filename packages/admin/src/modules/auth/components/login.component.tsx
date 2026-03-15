@@ -3,25 +3,24 @@ import React from 'react'
 import {
 	Form,
 } from 'react-final-form'
-
+import {
+	useNavigate,
+} from 'react-router-dom'
 import {
 	FormField,
 } from '../../../shared/components'
 import {
 	Button, ButtonType, Size, Color,
 } from '../../../shared/components'
-
 import {
 	Mail,
 } from '../../../assets/icons'
-
 import {
 	useLogin,
 } from '../../../shared/hooks/auth.hooks'
 import {
 	AuthPortal,
 } from '../../../shared/types'
-
 import type {
 	LoginBody,
 } from '../../../shared/types'
@@ -34,6 +33,9 @@ import {
 import {
 	useAuth,
 } from '../../../providers/auth-context.provider'
+import {
+	RouterKeys,
+} from '../../../router/keys'
 import * as styles from '../auth.styles'
 
 export const Login: React.FC = () => {
@@ -45,6 +47,7 @@ export const Login: React.FC = () => {
 	const {
 		check,
 	} = useAuth()
+	const navigate = useNavigate()
 
 	const handleSubmit = async(values: ILoginFormValues,): Promise<void> => {
 		const body: LoginBody = {
@@ -55,6 +58,10 @@ export const Login: React.FC = () => {
 
 		await login(body,)
 		await check()
+	}
+
+	const handleForgotPassword = (): void => {
+		navigate(RouterKeys.FORGOT_PASSWORD,)
 	}
 
 	return (
@@ -126,6 +133,17 @@ export const Login: React.FC = () => {
 								/>
 							</form>
 						)
+					}}
+				/>
+				<Button<ButtonType.TEXT>
+					onClick={handleForgotPassword}
+					type='submit'
+					className={styles.submitButton}
+					additionalProps={{
+						btnType: ButtonType.TEXT,
+						size:    Size.MEDIUM,
+						text:    'Forgot password?',
+						color:   Color.TERTIARY_GREY,
 					}}
 				/>
 			</div>
