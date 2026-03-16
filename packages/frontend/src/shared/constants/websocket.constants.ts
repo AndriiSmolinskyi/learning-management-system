@@ -1,0 +1,35 @@
+export const webSocketsNames = {
+	CLIENT_LIST_UPDATED: 'client-list-updated',
+	CLIENT_DELETED:      'client-deleted',
+	ASSET_TRANSFER:      'asset-transfer',
+	ASSET_ACTION:        'asset-action',
+	PORTFOLIO_DELETED:   'portfolio-deleted',
+	PORTFOLIO_CREATED:    'portfolio-created',
+	TOTALS_UPDATE:       'totals-update',
+	CBONDS_UPDATE:       'cbonds-update',
+	ASSET_MUTATING:       'asset-mutating',
+	PORTFOLIO_MUTATING:       'portfolio-mutating',
+	CLIENT_MUTATING:       'client-mutating',
+	BUDGET_MUTATING:     'budget-mutating',
+	BUDGET_LIST_UPDATED: 'budget-list-updated',
+	PORTFOLIO_EDITED:    'portfolio-edited',
+
+}
+
+export const webSocketsMessages = {
+	MODULE:              '[WebSockets]:',
+	CLIENT_LIST_UPDATED: 'Client list updated!',
+	CLIENT_DELETED:      'Client deleted!',
+	ASSET_TRANSFER:      'Asset transfered!',
+	ASSET_ACTION:        'Asset action!',
+	PORTFOLIO_DELETED:   'Portfolio deleted!',
+	PORTFOLIO_CREATED:    'Portfolio created!',
+	TOTALS_UPDATE:       'Totals updated!',
+	CBONDS_UPDATE:       'CBonds updated!',
+	ASSET_MUTATING:       'Asset is mutating',
+	PORTFOLIO_MUTATING:       'Portfolio is mutating',
+	CLIENT_MUTATING:       'Client is mutating',
+	BUDGET_MUTATING:       'Budget is mutating',
+	BUDGET_LIST_UPDATED: 'Budget list updated!',
+	PORTFOLIO_EDITED:    'Portfolio edited!',
+}

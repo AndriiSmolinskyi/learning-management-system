@@ -1,0 +1,1 @@
+export const allowedDocuments = ['pdf', 'png', 'jpg', 'jpeg', 'doc', 'xls', 'xlsx', 'docx',]

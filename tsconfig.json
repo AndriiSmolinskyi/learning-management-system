@@ -21,7 +21,8 @@
 		"paths": {
 			"@yarn-monorepo/*": [
 				"packages/backend/*",
-				"packages/admin/*"
+				"packages/admin/*",
+				"packages/frontend/*"
 			]
 		}
 	},
@@ -31,6 +32,9 @@
 		},
 		{
 			"path": "./packages/admin"
+		},
+		{
+			"path": "./packages/frontend"
 		}
 	],
 	"exclude": [
