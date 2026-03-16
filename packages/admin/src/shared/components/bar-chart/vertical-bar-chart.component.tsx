@@ -18,7 +18,7 @@ import {
 } from './vertical-bar-chart-label.component'
 import {
 	colors,
-} from '../../../shared/styles'
+} from '../../styles'
 
 import * as styles from './bar-chart.styles'
 

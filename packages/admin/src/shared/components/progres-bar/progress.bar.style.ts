@@ -5,7 +5,7 @@ import {
 	spaces,
 	montserratMidbold,
 	montserratMediumReg,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const container = css`
   width: 100%;

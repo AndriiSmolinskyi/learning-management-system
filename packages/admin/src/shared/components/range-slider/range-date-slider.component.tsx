@@ -9,7 +9,7 @@ import {
 } from './range-slider.styles'
 import {
 	useDebounce,
-} from '../../../shared/hooks'
+} from '../../hooks'
 
 import * as styles from './range-slider.styles'
 

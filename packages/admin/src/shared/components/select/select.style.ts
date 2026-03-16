@@ -5,7 +5,7 @@ import {
 import {
 	montserratMediumReg,
 	montserratMidbold,
-} from '../../../shared/styles/'
+} from '../../styles'
 
 export const selectWrapper = css`
   display: flex;

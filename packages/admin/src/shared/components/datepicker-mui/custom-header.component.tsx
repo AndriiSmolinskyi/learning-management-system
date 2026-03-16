@@ -21,7 +21,7 @@ import {
 } from 'date-fns'
 import {
 	formatDateToDDMMYYYY,
-} from '../../../shared/utils'
+} from '../../utils'
 interface ICustomCalendarHeaderProps extends PickersCalendarHeaderProps<Date> {
 	additionalInfo: Date;
 }

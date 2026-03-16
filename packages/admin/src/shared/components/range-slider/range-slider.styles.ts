@@ -5,7 +5,7 @@ import {
 	spaces,
 	montserratMediumReg,
 	montserratMidbold,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const rangeSliderWrapper = css`
 	margin-bottom: ${spaces.mid20};

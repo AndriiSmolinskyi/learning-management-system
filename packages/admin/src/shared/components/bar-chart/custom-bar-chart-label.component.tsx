@@ -11,7 +11,7 @@ import type {
 } from 'recharts'
 import type {
 	TAnalyticsChartData,
-} from '../../../shared/types'
+} from '../../types'
 
 import * as styles from './bar-chart.styles'
 

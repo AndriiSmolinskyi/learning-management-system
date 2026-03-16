@@ -7,7 +7,7 @@ import {
 	montserratMediumReg,
 	montserratMidbold,
 	spaces,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const collapseArrowButton = (isOpen: boolean,): string => {
 	return css`

@@ -5,7 +5,7 @@ import {
 } from '../../../assets/icons/arrow-left.svg'
 import {
 	Button, ButtonType, Color, Size,
-} from '../../../shared/components'
+} from '..'
 
 type Props = {
 	tabIndex?: number

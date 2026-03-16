@@ -4,7 +4,7 @@ import {
 	ButtonType,
 	Color,
 	Size,
-} from '../'
+} from '..'
 import {
 	Rotate,
 } from '../../../assets/icons'

@@ -4,7 +4,7 @@ import {
 import type {
 	SelectOptionType,
 	SelectValueType,
-} from '../../../shared/types'
+} from '../../types'
 
 export const requiredSelect = (
 	value: SelectValueType,

@@ -12,7 +12,7 @@ import {
 } from '../../utils'
 import type {
 	TExcelSheetType,
-} from '../../../shared/types'
+} from '../../types'
 
 import * as styles from './save-as-excel-button.styles'
 

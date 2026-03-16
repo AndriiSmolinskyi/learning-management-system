@@ -23,7 +23,7 @@ import type {
 	ResetPasswordBody,
 	ResetPasswordReturn,
 	LogoutReturn,
-} from '../../shared/types'
+} from '../types'
 
 export const useLogin = (): UseMutationResult<LoginReturn, Error, LoginBody> => {
 	return useMutation({

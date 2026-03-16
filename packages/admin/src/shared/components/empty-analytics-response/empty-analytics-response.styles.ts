@@ -3,7 +3,7 @@ import {
 } from '@emotion/css'
 import {
 	montserratMidbold,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const wrapper = css`
 	position: absolute;

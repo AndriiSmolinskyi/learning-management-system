@@ -22,7 +22,7 @@ import {
 } from './mui-datepicker.styles'
 import {
 	formatDateToDDMMYYYY,
-} from '../../../shared/utils'
+} from '../../utils'
 import {
 	CalendarPauseIcon,
 } from '../../../assets/icons'

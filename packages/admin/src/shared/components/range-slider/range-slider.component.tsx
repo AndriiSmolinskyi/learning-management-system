@@ -9,7 +9,7 @@ import {
 } from './range-slider.styles'
 import {
 	localeString,
-} from '../../../shared/utils'
+} from '../../utils'
 import * as styles from './range-slider.styles'
 
 type TRangeProps = {

@@ -5,7 +5,7 @@ import {
 import authBackground from '../../../assets/images/auth-background.jpg?inline'
 import {
 	montserratSemibold,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const container = css`
 position: relative;

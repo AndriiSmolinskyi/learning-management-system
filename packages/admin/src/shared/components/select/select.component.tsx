@@ -22,10 +22,10 @@ import {
 } from '../../../assets/icons'
 import {
 	CreatebleSelectEnum,
-} from '../../../shared/constants/createble-select.constants'
+} from '../../constants/createble-select.constants'
 import type {
 	IOptionType, SelectValueType,
-} from '../../../shared/types'
+} from '../../types'
 import type {
 	GroupBase,
 } from 'react-select'

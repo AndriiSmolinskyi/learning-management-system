@@ -5,7 +5,7 @@ import {
 	spaces,
 	montserratMidbold,
 	montserratMediumReg,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const inputBlock = css`
     display: flex;

@@ -15,10 +15,10 @@ import {
 import {
 	QueryProvider,
 } from './providers/query.provider'
-import '../src/translations/i18next'
+import './translations/i18next'
 import '../src/shared/styles/font-faces.css'
-import '../src/shared/styles/main'
-import '../src/shared/styles/theme'
+import './shared/styles/main'
+import './shared/styles/theme'
 import '@blueprintjs/core/lib/css/blueprint.css'
 import Router from './router/router'
 import * as styles from './shared/styles/main'

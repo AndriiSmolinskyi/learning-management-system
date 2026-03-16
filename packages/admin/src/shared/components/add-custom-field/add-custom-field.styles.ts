@@ -5,7 +5,7 @@ import {
 	montserratMediumReg,
 	montserratMidbold,
 	spaces,
-} from '../../../shared/styles'
+} from '../../styles'
 
 export const creationBlockWrapper = css`
 	width: 332px;

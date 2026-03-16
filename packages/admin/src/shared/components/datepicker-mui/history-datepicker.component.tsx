@@ -26,7 +26,7 @@ import {
 } from '@mui/material'
 import {
 	formatToUTCISOString,
-} from '../../../shared/utils'
+} from '../../utils'
 import {
 	isToday,
 } from 'date-fns'

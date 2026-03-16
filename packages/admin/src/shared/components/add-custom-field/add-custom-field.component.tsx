@@ -10,7 +10,7 @@ import {
 } from '../../../assets/icons/plus-blue.svg'
 import {
 	toggleState,
-} from '../../../shared/utils'
+} from '../../utils'
 import {
 	Button,
 	ButtonType,
