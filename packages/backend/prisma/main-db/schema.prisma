@@ -35,14 +35,14 @@ model User {
 }
 
 model StudentProfile {
-   userId String @id @map("user_id") @db.Uuid
-
-   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-   firstName String @map("first_name")
-   lastName  String @map("last_name")
-
-   email String
+   userId      String  @id @map("user_id") @db.Uuid
+   user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+   firstName   String  @map("first_name")
+   lastName    String  @map("last_name")
+   email       String
+   phoneNumber String? @map("phone_number")
+   country     String? @map("country")
+   city        String? @map("city")
 
    @@index([email])
    @@index([firstName, lastName])
