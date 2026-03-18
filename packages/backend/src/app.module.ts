@@ -3,6 +3,8 @@ import { Logger, Module, } from '@nestjs/common'
 import { ConfigModule, } from '@nestjs/config'
 import { AuthModule, } from './modules/auth/auth.module'
 import { MailModule, } from './modules/mail/mail.module'
+import { StudentsModule, } from './modules/students/students.module'
+import { JwtModule, } from './shared/auth/jwt.module'
 
 @Module({
 	imports:     [
@@ -22,6 +24,8 @@ import { MailModule, } from './modules/mail/mail.module'
 		},),
 		AuthModule,
 		MailModule,
+		StudentsModule,
+		JwtModule,
 	],
 },)
 
