@@ -139,6 +139,7 @@ export class StudentsService {
 				phoneNumber: body.phoneNumber,
 				country:     body.country,
 				city:        body.city,
+				comment:     body.comment,
 			},
 			select: {
 				firstName:   true,
@@ -146,6 +147,7 @@ export class StudentsService {
 				phoneNumber: true,
 				country:     true,
 				city:        true,
+				comment:     true,
 			},
 		},)
 
@@ -157,6 +159,7 @@ export class StudentsService {
 			phoneNumber: updated.phoneNumber,
 			country:     updated.country,
 			city:        updated.city,
+			comment:     updated.comment,
 			createdAt:   user.createdAt.toISOString(),
 			updatedAt:   user.updatedAt.toISOString(),
 		}
@@ -195,6 +198,7 @@ export class StudentsService {
 						phoneNumber: true,
 						country:     true,
 						city:        true,
+						comment:     true,
 					},
 				},
 			},
@@ -212,6 +216,7 @@ export class StudentsService {
 			phoneNumber: user.studentProfile.phoneNumber,
 			country:     user.studentProfile.country,
 			city:        user.studentProfile.city,
+			comment:     user.studentProfile.comment,
 			createdAt:   user.createdAt.toISOString(),
 			updatedAt:   user.updatedAt.toISOString(),
 		}

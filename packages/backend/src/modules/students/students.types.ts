@@ -8,6 +8,7 @@ export type StudentItem = {
 	phoneNumber?: string | null
 	country?: string | null
 	city?: string | null
+	comment?: string | null
 
 	createdAt: string
 	updatedAt: string

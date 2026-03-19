@@ -16,6 +16,7 @@ import {
 	NextButton,
 	PrevButton,
 	Size,
+	PhoneField,
 } from '../../../shared/components'
 import {
 	useCreateStudent,
@@ -188,7 +189,7 @@ export const AddStudents: React.FC<Props> = ({
 								<div className={styles.addInputBlock}>
 									<div className={styles.depositBlock}>
 										<p className={styles.fieldTitle}>Phone number</p>
-										<FormField
+										<PhoneField
 											name='phoneNumber'
 											placeholder='Enter phone number'
 										/>

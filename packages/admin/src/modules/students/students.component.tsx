@@ -30,6 +30,12 @@ import {
 import {
 	Table,
 } from './components/table.component'
+import {
+	EditStudent,
+} from './components/edit-student.component'
+import {
+	StudentDetails,
+} from './components/students-details.component'
 import * as styles from './students.styles'
 
 export const Students: React.FC = () => {
@@ -39,22 +45,23 @@ export const Students: React.FC = () => {
 	const [isDeleteModalShowed, setIsDeleteModalShown,] = React.useState(false,)
 	const [deleteStudentId, setDeleteStudentId,] = React.useState<string | undefined>(undefined,)
 	const [isUpdateOpen, setIsUpdateOpen,] = React.useState<boolean>(false,)
+	const [studentId, setStudentId,] = React.useState<string | undefined>(undefined,)
+	const [isDetailsOpen, setIsDetailsOpen,] = React.useState<boolean>(false,)
+	const [detailsStudentId, setDetailsStudentId,] = React.useState<string | undefined>(undefined,)
 
 	const toggleExitDialogVisible = toggleState(setIsExitDialogOpen,)
-
 	const toggleSuccessDialogVisible = toggleState(setIsSuccessDialogOpen,)
-
 	const toggleDeleteDialog = toggleState(setIsDeleteModalShown,)
 
-	const handleAddDrawerClose = React.useCallback((id?: number,) => {
-		toggleState(setIsCreateOpen,)()
+	const handleAddDrawerClose = React.useCallback((): void => {
+		setIsCreateOpen(false,)
 	}, [],)
 
 	const handleCloseSaveExit = (): void => {
 		setIsExitDialogOpen(false,)
 	}
 
-	const handleOpenDrawer = React.useCallback(() => {
+	const handleOpenDrawer = React.useCallback((): void => {
 		setIsCreateOpen(true,)
 	}, [],)
 
@@ -64,8 +71,23 @@ export const Students: React.FC = () => {
 	}
 
 	const toggleUpdateVisible = React.useCallback((id?: string,) => {
-		setDeleteStudentId(id,)
+		setStudentId(id,)
 		toggleState(setIsUpdateOpen,)()
+	}, [],)
+
+	const handleUpdateDrawerClose = React.useCallback((): void => {
+		setIsUpdateOpen(false,)
+		setStudentId(undefined,)
+	}, [],)
+
+	const toggleDetailsVisible = React.useCallback((id?: string,) => {
+		setDetailsStudentId(id,)
+		toggleState(setIsDetailsOpen,)()
+	}, [],)
+
+	const handleDetailsDrawerClose = React.useCallback((): void => {
+		setIsDetailsOpen(false,)
+		setDetailsStudentId(undefined,)
 	}, [],)
 
 	const {
@@ -83,12 +105,15 @@ export const Students: React.FC = () => {
 			<Header
 				onAddStudent={handleOpenDrawer}
 			/>
+
 			<Table
 				handleOpenDeleteModal={handleOpenDeleteModal}
 				studentList={studentList?.items}
 				toggleUpdateVisible={toggleUpdateVisible}
+				toggleDetailsVisible={toggleDetailsVisible}
 				onAddStudent={handleOpenDrawer}
 			/>
+
 			<Drawer
 				isOpen={isCreateOpen}
 				onClose={toggleExitDialogVisible}
@@ -103,6 +128,7 @@ export const Students: React.FC = () => {
 					handleCloseSaveExit={handleCloseSaveExit}
 				/>
 			</Drawer>
+
 			<Dialog
 				onClose={() => {
 					setIsSuccessDialogOpen(false,)
@@ -116,6 +142,7 @@ export const Students: React.FC = () => {
 					}}
 				/>
 			</Dialog>
+
 			<Dialog
 				onClose={() => {
 					setIsDeleteModalShown(false,)
@@ -128,6 +155,30 @@ export const Students: React.FC = () => {
 					studentId={deleteStudentId}
 				/>
 			</Dialog>
+
+			<Drawer
+				isOpen={isUpdateOpen}
+				onClose={handleUpdateDrawerClose}
+				isCloseButtonShown
+				nonPortalContainer
+			>
+				<EditStudent
+					onClose={handleUpdateDrawerClose}
+					studentId={studentId}
+				/>
+			</Drawer>
+
+			<Drawer
+				isOpen={isDetailsOpen}
+				onClose={handleDetailsDrawerClose}
+				isCloseButtonShown
+				nonPortalContainer
+			>
+				<StudentDetails
+					onClose={handleDetailsDrawerClose}
+					studentId={detailsStudentId}
+				/>
+			</Drawer>
 		</div>
 	)
 }

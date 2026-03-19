@@ -58,6 +58,12 @@ const studentSchema: yup.ObjectSchema<IStudentFormValues> = yup.object({
 		.matches(/^[A-Za-zА-Яа-яЁёІіЄєҐґ' -]*$/, 'City contains invalid characters',)
 		.nullable()
 		.default('',),
+	comment: yup
+		.string()
+		.trim()
+		.max(MAX_INPUT_LENGTH, `Comment must be at most ${MAX_INPUT_LENGTH} characters`,)
+		.nullable()
+		.default('',),
 },)
 
 export const validateStudentForm = async(

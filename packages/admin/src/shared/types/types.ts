@@ -74,27 +74,6 @@ export type LogoutReturn = OkResponse
 
 // students types
 
-export type StudentItem = {
-	id: string
-	email: string
-	firstName: string
-	lastName: string
-	phoneNumber?: string | null
-	country?: string | null
-	city?: string | null
-	createdAt: string
-	updatedAt: string
-}
-
-export type CreateStudentBody = {
-	email: string
-	firstName: string
-	lastName: string
-	phoneNumber?: string
-	country?: string
-	city?: string
-}
-
 export type CreateStudentReturn = {
 	student: StudentItem
 	temporaryPassword: string
@@ -127,10 +106,45 @@ export type StudentsListReturn = {
 	pageSize: number
 }
 
-export type UpdateStudentBody = {
-	firstName?: string
-	lastName?: string
+export interface IStudentFormValues {
+	firstName: string
+	lastName: string
+	email: string
+	phoneNumber?: string | null
+	country?: string | null
+	city?: string | null
+	comment?: string | null
+}
+
+export type StudentItem = {
+	id: string
+	email: string
+	firstName: string
+	lastName: string
+	phoneNumber?: string | null
+	country?: string | null
+	city?: string | null
+	comment?: string | null
+	createdAt: string
+	updatedAt: string
+}
+
+export type CreateStudentBody = {
+	email: string
+	firstName: string
+	lastName: string
 	phoneNumber?: string
 	country?: string
 	city?: string
+	comment?: string
+}
+
+export type UpdateStudentBody = {
+	firstName?: string
+	lastName?: string
+	email?: string
+	phoneNumber?: string
+	country?: string
+	city?: string
+	comment?: string
 }

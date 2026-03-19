@@ -43,6 +43,7 @@ model StudentProfile {
    phoneNumber String? @map("phone_number")
    country     String? @map("country")
    city        String? @map("city")
+   comment     String? @map("comment")
 
    @@index([email])
    @@index([firstName, lastName])

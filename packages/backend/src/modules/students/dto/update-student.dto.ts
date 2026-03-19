@@ -17,6 +17,10 @@ export class UpdateStudentDto {
 
 	@IsOptional()
 	@IsString()
+	public email?: string
+
+	@IsOptional()
+	@IsString()
 	public phoneNumber?: string
 
 	@IsOptional()
@@ -26,4 +30,8 @@ export class UpdateStudentDto {
 	@IsOptional()
 	@IsString()
 	public city?: string
+
+	@IsOptional()
+	@IsString()
+	public comment?: string
 }

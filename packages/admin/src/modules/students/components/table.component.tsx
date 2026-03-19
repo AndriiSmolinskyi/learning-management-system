@@ -30,13 +30,15 @@ type Props = {
 	studentList: Array<StudentItem> | undefined
 	onAddStudent: () => void
 	toggleUpdateVisible: (id: string) => void
-	handleOpenDeleteModal: (transactionTypeId: string) => void
+	toggleDetailsVisible: (id: string) => void
+	handleOpenDeleteModal: (studentId: string) => void
 }
 
 export const Table: React.FC<Props> = ({
 	studentList,
 	onAddStudent,
 	toggleUpdateVisible,
+	toggleDetailsVisible,
 	handleOpenDeleteModal,
 },) => {
 	const {
@@ -121,6 +123,7 @@ export const Table: React.FC<Props> = ({
 								key={student.id}
 								student={student}
 								handleOpenDeleteModal={handleOpenDeleteModal}
+								toggleDetailsVisible={toggleDetailsVisible}
 								toggleUpdateVisible={toggleUpdateVisible}
 							/>
 						)
