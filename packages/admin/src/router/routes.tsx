@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
 	Navigate,
 	Route,
+	Outlet,
 } from 'react-router-dom'
 
 import {
@@ -29,6 +30,12 @@ const Home = React.lazy(async() => {
 const Students = React.lazy(async() => {
 	return import('../modules/students/students.component')
 },)
+const Lessons = React.lazy(async() => {
+	return import('../modules/lessons/lessons/lessons.component')
+},)
+const CustomLessons = React.lazy(async() => {
+	return import('../modules/lessons/custom-lessons/custom-lessons.component')
+},)
 
 export const publicRoutes = (
 	<>
@@ -43,6 +50,10 @@ export const privateRoutes = (
 	<Route element={<PagesLayout />}>
 		<Route path={RouterKeys.ALL_MATCH} element={<Navigate to={RouterKeys.HOME} />} />
 		<Route path={RouterKeys.HOME} element={<Home />} />
-		<Route path={RouterKeys.STUDENTS} element={<Students />}/>
+		<Route path={RouterKeys.STUDENTS} element={<Students />} />
+		<Route path={RouterKeys.LESSONS} element={<Outlet />} >
+			<Route index element={<Lessons />} />
+			<Route path={RouterKeys.CUSTOM_LESSONS} element={<CustomLessons />} />
+		</Route>
 	</Route>
 )

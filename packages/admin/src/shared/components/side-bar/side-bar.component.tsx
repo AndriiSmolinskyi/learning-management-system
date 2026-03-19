@@ -10,6 +10,7 @@ import {
 import {
 	Coins,
 	Home,
+	Book,
 } from '../../../assets/icons'
 import {
 	Button,
@@ -36,6 +37,9 @@ import {
 import {
 	useAuth,
 } from '../../../providers/auth-context.provider'
+import {
+	useCustomLessonStore,
+} from '../../../modules/lessons/custom-lessons/custom-lessons.store'
 import * as styles from './side-bar.styles'
 
 export const SideBar: React.FC = () => {
@@ -51,6 +55,10 @@ export const SideBar: React.FC = () => {
 		await logout()
 		navigate(RouterKeys.LOGIN,)
 	}, [logout, navigate,],)
+
+	const {
+		resetCustomLessonStore,
+	} = useCustomLessonStore()
 
 	return (
 		<aside ref={profileRef}>
@@ -85,6 +93,23 @@ export const SideBar: React.FC = () => {
 								btnType:  ButtonType.ICON,
 								size:     Size.MEDIUM,
 								color:    Color.MICRO,
+							}}
+						/>
+					</Tooltip>
+					<Tooltip text='Lessons'>
+						<Button<ButtonType.ICON>
+							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.LESSONS,) && currentBtn,)}
+							additionalProps={{
+								icon:    <Book width={20} height={20}/>,
+								btnType:  ButtonType.ICON,
+								size:     Size.MEDIUM,
+								color:    Color.MICRO,
+							}}
+							onClick={() => {
+								navigate(RouterKeys.LESSONS, {
+									state: null,
+								},)
+								resetCustomLessonStore()
 							}}
 						/>
 					</Tooltip>

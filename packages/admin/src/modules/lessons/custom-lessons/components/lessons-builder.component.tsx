@@ -32,7 +32,7 @@ import {
 
 import * as styles from '../custom-lessons.styles'
 import {
-	ReorderReportDialog as ReorderLessonsDialog,
+	ReorderLessonsDialog,
 } from './reorder-lessons-dialog.component'
 
 type Props = {
@@ -90,10 +90,10 @@ export const LessonsBuilder: React.FC<Props> = ({
 						setIsUnsavedDialogOpen(true,)
 					}}
 					additionalProps={{
-						text:     'Exit',
-						btnType:  ButtonType.TEXT,
-						size:     Size.MEDIUM,
-						color:    Color.TERTIARY_GREY,
+						text:    'Exit',
+						btnType: ButtonType.TEXT,
+						size:    Size.MEDIUM,
+						color:   Color.TERTIARY_GREY,
 					}}
 				/>
 			</div>
@@ -118,7 +118,7 @@ export const LessonsBuilder: React.FC<Props> = ({
 					<CreateChartDialog
 						togglePopover={togglePopover}
 						toggleEditPieChart={toggleEditPieChart}
-						toggleEdiHorizontalChart={toggleEditHorizontalChart}
+						toggleEditHorizontalChart={toggleEditHorizontalChart}
 						toggleEditVerticalChart={toggleEditVerticalChart}
 						toggleEditBubbleChart={toggleEditBubbleChart}
 						toggleEditLineChart={toggleEditLineChart}
@@ -179,9 +179,9 @@ export const LessonsBuilder: React.FC<Props> = ({
 						onClick={handleCreateLesson}
 						disabled={createDisabled}
 						additionalProps={{
-							btnType:   ButtonType.TEXT,
-							text:      'Add lesson',
-							size:      Size.MEDIUM,
+							btnType: ButtonType.TEXT,
+							text:    'Add lesson',
+							size:    Size.MEDIUM,
 						}}
 					/>
 				)}
@@ -191,9 +191,9 @@ export const LessonsBuilder: React.FC<Props> = ({
 						onClick={handleUpdateLesson}
 						disabled={updateDisabled}
 						additionalProps={{
-							btnType:   ButtonType.TEXT,
-							text:      'Save edits',
-							size:      Size.MEDIUM,
+							btnType: ButtonType.TEXT,
+							text:    'Save edits',
+							size:    Size.MEDIUM,
 						}}
 					/>
 				)}
