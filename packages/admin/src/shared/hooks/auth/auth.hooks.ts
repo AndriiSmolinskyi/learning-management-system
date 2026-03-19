@@ -10,10 +10,10 @@ import {
 
 import {
 	toasterService,
-} from '../../services/toaster/toaster.service'
+} from '../../../services/toaster/toaster.service'
 import {
 	authService,
-} from '../../services/auth/auth.service'
+} from '../../../services/auth/auth.service'
 
 import type {
 	LoginBody,
@@ -23,7 +23,7 @@ import type {
 	ResetPasswordBody,
 	ResetPasswordReturn,
 	LogoutReturn,
-} from '../types'
+} from '../../types'
 
 export const useLogin = (): UseMutationResult<LoginReturn, Error, LoginBody> => {
 	return useMutation({

@@ -17,7 +17,7 @@ import {
 } from '../../../assets/icons'
 import {
 	useLogin,
-} from '../../../shared/hooks/auth.hooks'
+} from '../../../shared/hooks/auth/auth.hooks'
 import {
 	AuthPortal,
 } from '../../../shared/types'

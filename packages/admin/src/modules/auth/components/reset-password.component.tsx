@@ -28,7 +28,7 @@ import type {
 
 import {
 	useResetPassword,
-} from '../../../shared/hooks/auth.hooks'
+} from '../../../shared/hooks/auth/auth.hooks'
 
 import type {
 	IResetPasswordFormValues,
