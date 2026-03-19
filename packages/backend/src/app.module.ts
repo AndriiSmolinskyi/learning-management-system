@@ -5,6 +5,7 @@ import { AuthModule, } from './modules/auth/auth.module'
 import { MailModule, } from './modules/mail/mail.module'
 import { StudentsModule, } from './modules/students/students.module'
 import { JwtModule, } from './shared/auth/jwt.module'
+import { LessonsModule, } from './modules/lessons/lessons.module'
 
 @Module({
 	imports:     [
@@ -26,6 +27,7 @@ import { JwtModule, } from './shared/auth/jwt.module'
 		MailModule,
 		StudentsModule,
 		JwtModule,
+		LessonsModule,
 	],
 },)
 

@@ -63,3 +63,15 @@ model AdminProfile {
    @@index([email])
    @@map("admin_profiles")
 }
+
+model Lesson {
+   id        String   @id @default(uuid()) @db.Uuid
+   title     String   @db.VarChar(150)
+   comment   String?  @db.VarChar(500)
+   payload   Json?
+   createdAt DateTime @default(now()) @map("created_at")
+   updatedAt DateTime @updatedAt @map("updated_at")
+
+   @@index([title])
+   @@map("lessons")
+}

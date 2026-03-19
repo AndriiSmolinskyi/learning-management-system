@@ -1,4 +1,5 @@
 export const queryKeys = {
 	AUTH_CHECK: 'AUTH_CHECK',
-	STUDENTS:   'STUDENTS',
+	STUDENTS:   'students',
+	LESSONS:    'lessons',
 } as const

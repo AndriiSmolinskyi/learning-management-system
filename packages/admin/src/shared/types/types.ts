@@ -148,3 +148,48 @@ export type UpdateStudentBody = {
 	city?: string
 	comment?: string
 }
+
+export enum LessonsSortBy {
+	TITLE = 'title',
+	COMMENT = 'comment',
+	CREATED_AT = 'createdAt',
+	UPDATED_AT = 'updatedAt',
+}
+
+export type LessonPayload = Record<string, unknown>
+
+export type LessonItem = {
+	id: string
+	title: string
+	comment?: string | null
+	payload?: LessonPayload | null
+	createdAt: string
+	updatedAt: string
+}
+
+export type CreateLessonBody = {
+	title: string
+	comment?: string
+	payload?: LessonPayload
+}
+
+export type UpdateLessonBody = {
+	title?: string
+	comment?: string
+	payload?: LessonPayload
+}
+
+export type GetLessonsQuery = {
+	search?: string
+	sortBy?: LessonsSortBy
+	sortOrder?: SortOrder
+	page?: number
+	pageSize?: number
+}
+
+export type LessonsListReturn = {
+	items: Array<LessonItem>
+	total: number
+	page: number
+	pageSize: number
+}

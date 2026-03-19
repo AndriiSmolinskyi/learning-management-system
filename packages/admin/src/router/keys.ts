@@ -18,4 +18,8 @@ export class RouterKeys {
 	public static HOME = '/home'
 
 	public static STUDENTS = '/students'
+
+	public static LESSONS = '/lessons'
+
+	public static CUSTOM_LESSONS = `custom`
 }
