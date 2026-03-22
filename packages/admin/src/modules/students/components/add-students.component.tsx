@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable complexity */
 import React from 'react'
 import {
-	cx,
-} from '@emotion/css'
-import {
 	Form,
 } from 'react-final-form'
+import {
+	cx,
+} from '@emotion/css'
 
 import {
 	Button,
@@ -53,6 +54,7 @@ const INITIAL_VALUES: IStudentFormValues = {
 	phoneNumber: '',
 	country:     '',
 	city:        '',
+	comment:     '',
 }
 
 export const AddStudents: React.FC<Props> = ({
@@ -74,12 +76,13 @@ export const AddStudents: React.FC<Props> = ({
 			onSubmit={async(values, form,) => {
 				try {
 					await createStudent({
-						firstName:   values.firstName.trim(),
-						lastName:    values.lastName.trim(),
-						email:       values.email.trim(),
-						phoneNumber: values.phoneNumber?.trim() ?? undefined,
-						country:     values.country?.trim() ?? undefined,
-						city:        values.city?.trim() ?? undefined,
+						firstName:   (values.firstName ?? '').trim(),
+						lastName:    (values.lastName ?? '').trim(),
+						email:       (values.email ?? '').trim(),
+						phoneNumber: (values.phoneNumber ?? '').trim() || undefined,
+						country:     (values.country ?? '').trim() || undefined,
+						city:        (values.city ?? '').trim() || undefined,
+						comment:     (values.comment ?? '').trim() || undefined,
 					},)
 
 					form.reset()
@@ -102,19 +105,28 @@ export const AddStudents: React.FC<Props> = ({
 				hasValidationErrors,
 				form,
 			},) => {
-				const isFormEmpty = !values.firstName.trim() &&
-					!values.lastName.trim() &&
-					!values.email.trim() &&
-					!values.phoneNumber?.trim() &&
-					!values.country?.trim() &&
-					!values.city?.trim()
+				const firstName = (values.firstName ?? '').trim()
+				const lastName = (values.lastName ?? '').trim()
+				const email = (values.email ?? '').trim()
+				const phoneNumber = (values.phoneNumber ?? '').trim()
+				const country = (values.country ?? '').trim()
+				const city = (values.city ?? '').trim()
+				const comment = (values.comment ?? '').trim()
+
+				const isFormEmpty = !firstName &&
+					!lastName &&
+					!email &&
+					!phoneNumber &&
+					!country &&
+					!city &&
+					!comment
 
 				const firstStepDisabled = Boolean(
 					errors?.['firstName'] ||
 					errors?.['lastName'],
-				) || !values.firstName.trim() || !values.lastName.trim()
+				) || !firstName || !lastName
 
-				const secondStepDisabled = Boolean(errors?.['email'],) || !values.email.trim()
+				const secondStepDisabled = Boolean(errors?.['email'],) || !email
 
 				const thirdStepDisabled = Boolean(errors?.['phoneNumber'],)
 
@@ -226,6 +238,14 @@ export const AddStudents: React.FC<Props> = ({
 										<FormField
 											name='city'
 											placeholder='Enter city'
+										/>
+									</div>
+
+									<div className={styles.depositBlock}>
+										<p className={styles.fieldTitle}>Comment (optional)</p>
+										<FormField
+											name='comment'
+											placeholder='Enter comment'
 										/>
 									</div>
 								</div>

@@ -95,7 +95,7 @@ export const ProfileDialog: React.FC<IProps> = ({
 			</button>
 			<div className={cx(bottomBlock, hoverZone,)}>
 				<p className={versionStyle}>
-					Version 0.0.1 from 16.03.2026
+					Version 4.0.0 from 22.03.2026
 				</p>
 			</div>
 		</div>)

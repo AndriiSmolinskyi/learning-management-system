@@ -193,3 +193,51 @@ export type LessonsListReturn = {
 	page: number
 	pageSize: number
 }
+
+// groups
+
+export enum GroupsSortBy {
+	GROUP_NAME = 'groupName',
+	COURSE_NAME = 'courseName',
+	START_DATE = 'startDate',
+	CREATED_AT = 'createdAt',
+}
+
+export type GroupItem = {
+	id: string
+	groupName: string
+	courseName: string
+	comment?: string | null
+	startDate: string
+	createdAt: string
+	updatedAt: string
+}
+
+export type GroupsListReturn = {
+	items: Array<GroupItem>
+	total: number
+	page: number
+	pageSize: number
+}
+
+export type GetGroupsQuery = {
+	search?: string
+	sortBy?: GroupsSortBy
+	sortOrder?: SortOrder
+	page?: number
+	pageSize?: number
+}
+
+export type CreateGroupBody = {
+	groupName: string
+	courseName: string
+	startDate: string
+	comment?: string
+}
+
+export type UpdateGroupBody = {
+	groupName?: string
+	courseName?: string
+	startDate?: string
+	comment?: string
+}

@@ -58,6 +58,7 @@ const studentSchema: yup.ObjectSchema<IStudentFormValues> = yup.object({
 		.matches(/^[A-Za-zА-Яа-яЁёІіЄєҐґ' -]*$/, 'City contains invalid characters',)
 		.nullable()
 		.default('',),
+
 	comment: yup
 		.string()
 		.trim()
