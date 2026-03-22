@@ -26,14 +26,16 @@ import * as styles from './table.style'
 
 type Props = {
 	group: GroupItem
-	toggleUpdateVisible: (group: TEditableGroup) => void
+	toggleStudentsVisible: (id?: string) => void
 	handleOpenDeleteModal: (groupId: string) => void
+	toggleUpdateVisible: (group: TEditableGroup) => void
 }
 
 export const TableItem: React.FC<Props> = ({
 	group,
 	toggleUpdateVisible,
 	handleOpenDeleteModal,
+	toggleStudentsVisible,
 },) => {
 	const [isPopoverShown, setIsPopoverShown,] = React.useState<boolean>(false,)
 
@@ -46,6 +48,7 @@ export const TableItem: React.FC<Props> = ({
 						setDialogOpen={setIsPopoverShown}
 						toggleUpdateVisible={toggleUpdateVisible}
 						handleOpenDeleteModal={handleOpenDeleteModal}
+						toggleStudentsVisible={toggleStudentsVisible}
 					>
 						<Button<ButtonType.ICON>
 							onClick={toggleState(setIsPopoverShown,)}

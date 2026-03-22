@@ -30,8 +30,9 @@ import * as styles from './table.style'
 type Props = {
 	groupList: Array<GroupItem> | undefined
 	onAddGroup: () => void
-	toggleUpdateVisible: (group: TEditableGroup) => void
+	toggleStudentsVisible: (id?: string) => void
 	handleOpenDeleteModal: (groupId: string) => void
+	toggleUpdateVisible: (group: TEditableGroup) => void
 }
 
 export const Table: React.FC<Props> = ({
@@ -39,6 +40,7 @@ export const Table: React.FC<Props> = ({
 	onAddGroup,
 	toggleUpdateVisible,
 	handleOpenDeleteModal,
+	toggleStudentsVisible,
 },) => {
 	const {
 		filter,
@@ -122,8 +124,9 @@ export const Table: React.FC<Props> = ({
 							<TableItem
 								key={group.id}
 								group={group}
-								handleOpenDeleteModal={handleOpenDeleteModal}
 								toggleUpdateVisible={toggleUpdateVisible}
+								handleOpenDeleteModal={handleOpenDeleteModal}
+								toggleStudentsVisible={toggleStudentsVisible}
 							/>
 						)
 					},)}

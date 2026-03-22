@@ -43,6 +43,18 @@ export const fieldsContainer = (isFullHeight = false,):string => {
 `
 }
 
+export const fieldsContainerPadding = (isFullHeight = false,):string => {
+	return css`
+   height: ${isFullHeight ?
+		'calc(100vh - 90px)' :
+		'100vh'};
+   overflow-y: auto;
+	background-color: var(--base-white);
+	padding: 0px 10px;
+   ${customScrollbar}
+`
+}
+
 export const editFormWrapper = css`
 	display: flex;
 	flex-direction: column;
@@ -152,4 +164,27 @@ export const activationStatusText = css`
 	font-size: 14px;
 	line-height: 22.6px;
 	color: var(--gray-800);
+`
+
+export const viewBlock = css`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: var(--gray-50);
+	padding: 10px 10px;
+	border-radius: 10px;
+`
+
+export const selectBlock = css`
+	margin-top: 20px;
+`
+
+export const addAnother = css`
+	margin-top: 10px;
+`
+
+export const itemsBlock = css`
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 `

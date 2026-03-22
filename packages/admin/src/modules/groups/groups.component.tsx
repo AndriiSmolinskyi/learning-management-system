@@ -36,6 +36,9 @@ import {
 import type {
 	TEditableGroup,
 } from './groups.types'
+import {
+	GroupsStudents,
+} from './components/groups-students.component'
 import * as styles from './groups.styles'
 
 export const Groups: React.FC = () => {
@@ -46,6 +49,8 @@ export const Groups: React.FC = () => {
 	const [deleteGroupId, setDeleteGroupId,] = React.useState<string | undefined>(undefined,)
 	const [isUpdateOpen, setIsUpdateOpen,] = React.useState<boolean>(false,)
 	const [editableGroup, setEditableGroup,] = React.useState<TEditableGroup | undefined>(undefined,)
+	const [isStudentsOpen, setIsStudentsOpen,] = React.useState<boolean>(false,)
+	const [studentsGroupId, setStudentsGroupId,] = React.useState<string | undefined>(undefined,)
 
 	const toggleExitDialogVisible = toggleState(setIsExitDialogOpen,)
 	const toggleSuccessDialogVisible = toggleState(setIsSuccessDialogOpen,)
@@ -78,6 +83,18 @@ export const Groups: React.FC = () => {
 		setEditableGroup(undefined,)
 	}, [],)
 
+	const toggleStudentsVisible = React.useCallback((id?: string,) => {
+		setStudentsGroupId(id,)
+		setIsStudentsOpen((prev,) => {
+			return !prev
+		},)
+	}, [],)
+
+	const handleStudentsDrawerClose = React.useCallback((): void => {
+		setIsStudentsOpen(false,)
+		setStudentsGroupId(undefined,)
+	}, [],)
+
 	const {
 		filter,
 	} = useGroupsStore()
@@ -95,10 +112,11 @@ export const Groups: React.FC = () => {
 			/>
 
 			<Table
-				handleOpenDeleteModal={handleOpenDeleteModal}
 				groupList={groupList?.items}
-				toggleUpdateVisible={toggleUpdateVisible}
 				onAddGroup={handleOpenDrawer}
+				toggleUpdateVisible={toggleUpdateVisible}
+				toggleStudentsVisible={toggleStudentsVisible}
+				handleOpenDeleteModal={handleOpenDeleteModal}
 			/>
 
 			<Drawer
@@ -152,6 +170,17 @@ export const Groups: React.FC = () => {
 				<EditGroup
 					onClose={handleUpdateDrawerClose}
 					group={editableGroup}
+				/>
+			</Drawer>
+			<Drawer
+				isOpen={isStudentsOpen}
+				onClose={handleStudentsDrawerClose}
+				isCloseButtonShown
+				nonPortalContainer
+			>
+				<GroupsStudents
+					onClose={handleStudentsDrawerClose}
+					groupId={studentsGroupId}
 				/>
 			</Drawer>
 		</div>
