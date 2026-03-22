@@ -10,9 +10,11 @@ import type {
 	CreateGroupBody,
 	GetGroupsQuery,
 	GroupItem,
+	GroupItemExtended,
 	GroupsListReturn,
 	UpdateGroupBody,
 	OkResponse,
+	ChangeGroupStudentsBody,
 } from '../../shared/types'
 
 import {
@@ -38,8 +40,19 @@ class GroupsService {
 		},)}`,)
 	}
 
+	public async getGroupById(id: string,): Promise<GroupItemExtended> {
+		return this.httpService.get(`${this.module}/${id}`,)
+	}
+
 	public async updateGroup(id: string, body: UpdateGroupBody,): Promise<GroupItem> {
 		return this.httpService.patch(`${this.module}/${id}`, body,)
+	}
+
+	public async changeGroupStudents(
+		id: string,
+		body: ChangeGroupStudentsBody,
+	): Promise<GroupItemExtended> {
+		return this.httpService.patch(`${this.module}/${id}/${GroupRoutes.STUDENTS}`, body,)
 	}
 
 	public async deleteGroup(id: string,): Promise<OkResponse> {

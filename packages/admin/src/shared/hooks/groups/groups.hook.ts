@@ -22,9 +22,11 @@ import type {
 	CreateGroupBody,
 	GetGroupsQuery,
 	GroupItem,
+	GroupItemExtended,
 	GroupsListReturn,
 	UpdateGroupBody,
 	OkResponse,
+	ChangeGroupStudentsBody,
 } from '../../types'
 import {
 	queryKeys,
@@ -35,6 +37,16 @@ export const useGroupsList = (filter: GetGroupsQuery,): UseQueryResult<GroupsLis
 		queryKey: [queryKeys.GROUPS, filter,],
 		queryFn:  async() => {
 			return groupsService.getGroupsFiltered(filter,)
+		},
+	},)
+}
+
+export const useGroup = (id: string | undefined,): UseQueryResult<GroupItemExtended, Error> => {
+	return useQuery({
+		queryKey: [queryKeys.GROUPS, id,],
+		enabled:  Boolean(id,),
+		queryFn:  async() => {
+			return groupsService.getGroupById(id!,)
 		},
 	},)
 }
@@ -75,12 +87,51 @@ export const useUpdateGroup = (): UseMutationResult<GroupItem, Error, { id: stri
 			queryClient.invalidateQueries({
 				queryKey: [queryKeys.GROUPS,],
 			},)
-			queryClient.setQueryData([queryKeys.GROUPS, data.id,], data,)
+			queryClient.setQueryData([queryKeys.GROUPS, data.id,], (prev: GroupItemExtended | GroupItem | undefined,) => {
+				if (!prev) {
+					return data
+				}
+
+				return {
+					...prev,
+					...data,
+				}
+			},)
 		},
 		async onError(error,) {
 			await toasterService.showErrorToast({
 				message: error instanceof AxiosError ?
 					error.response?.data?.message ?? 'Failed to update group' :
+					error.message,
+			},)
+		},
+	},)
+}
+
+export const useChangeGroupStudents = (): UseMutationResult<
+	GroupItemExtended,
+	Error,
+	{ id: string, body: ChangeGroupStudentsBody }
+> => {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationFn: async({
+			id,
+			body,
+		}: { id: string, body: ChangeGroupStudentsBody },) => {
+			return groupsService.changeGroupStudents(id, body,)
+		},
+		onSuccess(data,) {
+			queryClient.setQueryData([queryKeys.GROUPS, data.id,], data,)
+			queryClient.invalidateQueries({
+				queryKey: [queryKeys.GROUPS,],
+			},)
+		},
+		async onError(error,) {
+			await toasterService.showErrorToast({
+				message: error instanceof AxiosError ?
+					error.response?.data?.message ?? 'Failed to update group students' :
 					error.message,
 			},)
 		},

@@ -213,6 +213,30 @@ export type GroupItem = {
 	updatedAt: string
 }
 
+export type GroupStudentProfileItem = {
+	userId: string
+	firstName: string
+	lastName: string
+	email: string
+	phoneNumber?: string | null
+	country?: string | null
+	city?: string | null
+	comment?: string | null
+}
+
+export type GroupLessonItem = {
+	id: string
+	title: string
+	comment?: string | null
+	createdAt: string
+	updatedAt: string
+}
+
+export type GroupItemExtended = GroupItem & {
+	studentProfiles: Array<GroupStudentProfileItem>
+	lessons: Array<GroupLessonItem>
+}
+
 export type GroupsListReturn = {
 	items: Array<GroupItem>
 	total: number
@@ -240,4 +264,8 @@ export type UpdateGroupBody = {
 	courseName?: string
 	startDate?: string
 	comment?: string
+}
+
+export type ChangeGroupStudentsBody = {
+	studentIds: Array<string>
 }

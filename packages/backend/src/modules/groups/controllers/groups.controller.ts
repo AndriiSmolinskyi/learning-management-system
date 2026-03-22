@@ -1,13 +1,13 @@
 import {
 	Body,
 	Controller,
+	Delete,
 	Get,
 	HttpCode,
 	HttpStatus,
 	Param,
 	Patch,
 	Post,
-	Delete,
 	Query,
 	UseGuards,
 } from '@nestjs/common'
@@ -23,9 +23,11 @@ import { GroupsService, } from '../services/groups.service'
 import { CreateGroupDto, } from '../dto/create-group.dto'
 import { UpdateGroupDto, } from '../dto/update-group.dto'
 import { GetGroupsDto, } from '../dto/get-groups.dto'
+import { ChangeGroupStudentsDto, } from '../dto/change-group-students.dto'
 
 import type {
 	GroupItem,
+	GroupItemExtended,
 	GroupsListReturn,
 } from '../groups.types'
 
@@ -57,6 +59,13 @@ export class GroupsController {
 		return this.groupsService.getGroups(query,)
 	}
 
+	@Get(GroupsRoutes.BY_ID,)
+	public async getGroupById(
+		@Param('id',) id: string,
+	): Promise<GroupItemExtended> {
+		return this.groupsService.getGroupById(id,)
+	}
+
 	@Patch(GroupsRoutes.BY_ID,)
 	@ApiBody({
 		description: 'Update group fields',
@@ -67,6 +76,18 @@ export class GroupsController {
 		@Body() body: UpdateGroupDto,
 	): Promise<GroupItem> {
 		return this.groupsService.updateGroup(id, body,)
+	}
+
+	@Patch(GroupsRoutes.STUDENTS,)
+	@ApiBody({
+		description: 'Replace group students by student ids',
+		type:        ChangeGroupStudentsDto,
+	},)
+	public async changeGroupStudents(
+		@Param('id',) id: string,
+		@Body() body: ChangeGroupStudentsDto,
+	): Promise<GroupItemExtended> {
+		return this.groupsService.changeGroupStudents(id, body.studentIds,)
 	}
 
 	@Delete(GroupsRoutes.BY_ID,)

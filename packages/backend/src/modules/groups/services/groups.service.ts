@@ -2,6 +2,7 @@
 import {
 	Injectable,
 	NotFoundException,
+	BadRequestException,
 } from '@nestjs/common'
 import { PrismaService, } from 'nestjs-prisma'
 import type {
@@ -25,6 +26,7 @@ import type {
 import type {
 	GroupItem,
 	GroupsListReturn,
+	GroupItemExtended,
 } from '../groups.types'
 
 @Injectable()
@@ -139,6 +141,142 @@ export class GroupsService {
 		},)
 
 		return { ok: true, }
+	}
+
+	public async getGroupById(id: string,): Promise<GroupItemExtended> {
+		const group = await this.prismaService.group.findUnique({
+			where:  { id, },
+			select: {
+				id:         true,
+				groupName:  true,
+				courseName: true,
+				comment:    true,
+				startDate:  true,
+				createdAt:  true,
+				updatedAt:  true,
+
+				studentProfiles: {
+					select: {
+						userId:      true,
+						firstName:   true,
+						lastName:    true,
+						email:       true,
+						phoneNumber: true,
+						country:     true,
+						city:        true,
+						comment:     true,
+					},
+					orderBy: [
+						{ firstName: 'asc', },
+						{ lastName: 'asc', },
+					],
+				},
+
+				lessons: {
+					select: {
+						id:        true,
+						title:     true,
+						comment:   true,
+						createdAt: true,
+						updatedAt: true,
+					},
+					orderBy: {
+						createdAt: 'asc',
+					},
+				},
+			},
+		},)
+
+		if (!group) {
+			throw new NotFoundException('Group not found',)
+		}
+
+		return {
+			id:         group.id,
+			groupName:  group.groupName,
+			courseName: group.courseName,
+			comment:    group.comment,
+			startDate:  group.startDate.toISOString(),
+			createdAt:  group.createdAt.toISOString(),
+			updatedAt:  group.updatedAt.toISOString(),
+
+			studentProfiles: group.studentProfiles.map((student,) => {
+				return {
+					userId:      student.userId,
+					firstName:   student.firstName,
+					lastName:    student.lastName,
+					email:       student.email,
+					phoneNumber: student.phoneNumber,
+					country:     student.country,
+					city:        student.city,
+					comment:     student.comment,
+				}
+			},),
+
+			lessons: group.lessons.map((lesson,) => {
+				return {
+					id:        lesson.id,
+					title:     lesson.title,
+					comment:   lesson.comment,
+					createdAt: lesson.createdAt.toISOString(),
+					updatedAt: lesson.updatedAt.toISOString(),
+				}
+			},),
+		}
+	}
+
+	public async changeGroupStudents(
+		groupId: string,
+		studentIds: Array<string>,
+	): Promise<GroupItemExtended> {
+		await this.ensureGroupExists(groupId,)
+
+		const uniqueStudentIds = Array.from(new Set(studentIds,),)
+
+		const users = await this.prismaService.user.findMany({
+			where: {
+				id:   { in: uniqueStudentIds, },
+				role: 'STUDENT',
+			},
+			select: {
+				id: true,
+			},
+		},)
+
+		if (users.length !== uniqueStudentIds.length) {
+			throw new BadRequestException('Some students were not found',)
+		}
+
+		const studentProfiles = await this.prismaService.studentProfile.findMany({
+			where: {
+				userId: { in: uniqueStudentIds, },
+			},
+			select: {
+				userId: true,
+			},
+		},)
+
+		if (studentProfiles.length !== uniqueStudentIds.length) {
+			throw new BadRequestException('Some student profiles were not found',)
+		}
+
+		await this.prismaService.group.update({
+			where: { id: groupId, },
+			data:  {
+				users: {
+					set: uniqueStudentIds.map((id,) => {
+						return { id, }
+					},),
+				},
+				studentProfiles: {
+					set: uniqueStudentIds.map((userId,) => {
+						return { userId, }
+					},),
+				},
+			},
+		},)
+
+		return this.getGroupById(groupId,)
 	}
 
 	private async ensureGroupExists(id: string,): Promise<void> {

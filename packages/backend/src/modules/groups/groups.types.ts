@@ -1,3 +1,8 @@
+import type {
+	Lesson,
+	StudentProfile,
+} from '@prisma/client'
+
 export type GroupItem = {
 	id: string
 	groupName: string
@@ -13,4 +18,22 @@ export type GroupsListReturn = {
 	total: number
 	page: number
 	pageSize: number
+}
+
+export type GroupStudentProfileItem = Pick<
+	StudentProfile,
+	'userId' | 'firstName' | 'lastName' | 'email' | 'phoneNumber' | 'country' | 'city' | 'comment'
+>
+
+export type GroupLessonItem = Pick<
+	Lesson,
+	'id' | 'title' | 'comment'
+> & {
+	createdAt: string
+	updatedAt: string
+}
+
+export type GroupItemExtended = GroupItem & {
+	studentProfiles: Array<GroupStudentProfileItem>
+	lessons: Array<GroupLessonItem>
 }
