@@ -4,7 +4,7 @@ import {
 	Plus,
 	Search,
 	XmarkSecond,
-	Book,
+	Settings,
 } from '../../../assets/icons'
 import {
 	Button,
@@ -58,7 +58,7 @@ export const Header: React.FC<HeaderProps> = ({
 	return (
 		<div className={styles.headerWrapper}>
 			<div className={styles.titleIconBlock}>
-				<Book width={32} height={32} />
+				<Settings width={32} height={32} />
 				<p className={styles.headerTitle}>Groups</p>
 			</div>
 
