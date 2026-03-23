@@ -1,5 +1,4 @@
 export * from './lessons-content.component'
-export * from './lessons-builder.component'
 export * from './pie-chart'
 export * from './horizontal-chart'
 export * from './vertical-chart'

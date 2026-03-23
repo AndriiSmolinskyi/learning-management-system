@@ -111,14 +111,13 @@ export const main = css`
 	width: 100%;
 	height: 100%;
 	margin-top: 20px;
-	border-radius: 26px;
 	box-shadow: -2px 4px 10px 0px #2A2C731F;
 	display: flex;
 `
 
 export const side = css`
 	border-top-left-radius: 26px;
-	width: 15%;
+	width: 20%;
 	height: 100%;
 	border-right: 1px solid var(--gray-100);
 `
