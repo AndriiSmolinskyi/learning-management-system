@@ -23,11 +23,11 @@ const ResetPassword = React.lazy(async() => {
 const PagesLayout = React.lazy(async() => {
 	return import('../shared/components/pages-layout')
 },)
-const Home = React.lazy(async() => {
-	return import('../modules/home/home.component')
+const Group = React.lazy(async() => {
+	return import('../modules/groups/groups.component')
 },)
-const Students = React.lazy(async() => {
-	return import('../modules/students/students.component')
+const GroupDetailsPage = React.lazy(async() => {
+	return import('../modules/groups/components/group-details-page.component')
 },)
 
 export const publicRoutes = (
@@ -41,8 +41,8 @@ export const publicRoutes = (
 
 export const privateRoutes = (
 	<Route element={<PagesLayout />}>
-		<Route path={RouterKeys.ALL_MATCH} element={<Navigate to={RouterKeys.HOME} />} />
-		<Route path={RouterKeys.HOME} element={<Home />} />
-		<Route path={RouterKeys.STUDENTS} element={<Students />}/>
+		<Route path={RouterKeys.ALL_MATCH} element={<Navigate to={RouterKeys.GROUPS} />} />
+		<Route path={RouterKeys.GROUPS} element={<Group />} />
+		<Route path={RouterKeys.GROUP} element={<GroupDetailsPage />} />
 	</Route>
 )

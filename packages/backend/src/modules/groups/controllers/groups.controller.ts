@@ -67,20 +67,20 @@ export class GroupsController {
 		return this.groupsService.getGroups(query,)
 	}
 
-	@Get(GroupsRoutes.BY_ID,)
-	@Roles(Role.ADMIN,)
-	public async getGroupById(
-		@Param('id',) id: string,
-	): Promise<GroupItemExtended> {
-		return this.groupsService.getGroupById(id,)
-	}
-
 	@Get(GroupsRoutes.MY_GROUPS,)
 	@Roles(Role.STUDENT,)
 	public async getMyGroups(
 		@Req() req: Request & { user: { userId: string, role: Role } },
 	): Promise<StudentGroupsListReturn> {
 		return this.groupsService.getMyGroups(req.user.userId,)
+	}
+
+	@Get(GroupsRoutes.BY_ID,)
+	@Roles(Role.ADMIN,)
+	public async getGroupById(
+		@Param('id',) id: string,
+	): Promise<GroupItemExtended> {
+		return this.groupsService.getGroupById(id,)
 	}
 
 	@Get(GroupsRoutes.MY_BY_ID,)
