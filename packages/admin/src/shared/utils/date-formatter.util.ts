@@ -1,9 +1,6 @@
 import {
 	format, min,
 } from 'date-fns'
-import type {
-	ITransaction,
-} from '../types'
 
 export function formatDateToDDMMYYYY(isoString: Date | string, dotted?: boolean,): string {
 	const date = new Date(isoString,)
@@ -56,26 +53,6 @@ export const formatDateToThreeLetterMonth = (isoDate: string,): string => {
 		year:  'numeric',
 	},)
 		.replace(/(\d+) (\w+) (\d+)/, '$2 $1, $3',)
-}
-
-export const getOldestTransactionDate = (transactions: Array<ITransaction>,): string | null => {
-	if (!transactions.length) {
-		return null
-	}
-	const dates = transactions
-		.map((t,) => {
-			return (t.transactionDate ?
-				new Date(t.transactionDate,) :
-				null)
-		},)
-		.filter((d,): d is Date => {
-			return d !== null
-		},)
-	if (!dates.length) {
-		return null
-	}
-	const oldestDate = min(dates,)
-	return format(oldestDate, 'dd.MM.yyyy',)
 }
 
 export const isDateFromPast = (dateString: string,): boolean => {
