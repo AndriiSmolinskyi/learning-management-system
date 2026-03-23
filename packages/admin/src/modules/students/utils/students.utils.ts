@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import type {
 	IStudentFormValues,
 } from '../students.types'
@@ -6,8 +7,8 @@ import type {
 } from '../../../shared/types'
 
 const getStudentNameStep = (values: IStudentFormValues,): string => {
-	const firstName = values.firstName.trim()
-	const lastName = values.lastName.trim()
+	const firstName = (values.firstName ?? '').trim()
+	const lastName = (values.lastName ?? '').trim()
 
 	if (!firstName || !lastName) {
 		return 'Enter first name and last name.'
@@ -17,7 +18,7 @@ const getStudentNameStep = (values: IStudentFormValues,): string => {
 }
 
 const getStudentEmailStep = (values: IStudentFormValues,): string => {
-	const email = values.email.trim()
+	const email = (values.email ?? '').trim()
 
 	if (!email) {
 		return 'Enter student email.'
@@ -27,7 +28,7 @@ const getStudentEmailStep = (values: IStudentFormValues,): string => {
 }
 
 const getStudentPhoneStep = (values: IStudentFormValues,): string => {
-	const phoneNumber = values.phoneNumber?.trim()
+	const phoneNumber = (values.phoneNumber ?? '').trim()
 
 	if (!phoneNumber) {
 		return 'Add phone number if needed.'
@@ -38,8 +39,8 @@ const getStudentPhoneStep = (values: IStudentFormValues,): string => {
 
 const getStudentAdditionalStep = (values: IStudentFormValues,): string => {
 	const items = [
-		values.country?.trim(),
-		values.city?.trim(),
+		(values.country ?? '').trim(),
+		(values.city ?? '').trim(),
 	].filter(Boolean,)
 
 	if (items.length === 0) {

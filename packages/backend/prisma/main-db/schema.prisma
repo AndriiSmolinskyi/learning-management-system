@@ -1,4 +1,3 @@
-// prisma/schema.prisma
 datasource db {
    provider = "postgresql"
    url      = env("DATABASE_URL")
@@ -31,6 +30,8 @@ model User {
    studentProfile StudentProfile?
    adminProfile   AdminProfile?
 
+   groups Group[] @relation("GroupUsers")
+
    @@map("users")
 }
 
@@ -44,6 +45,8 @@ model StudentProfile {
    country     String? @map("country")
    city        String? @map("city")
    comment     String? @map("comment")
+
+   groups Group[] @relation("GroupStudentProfiles")
 
    @@index([email])
    @@index([firstName, lastName])
@@ -72,6 +75,28 @@ model Lesson {
    createdAt DateTime @default(now()) @map("created_at")
    updatedAt DateTime @updatedAt @map("updated_at")
 
+   groups Group[] @relation("GroupLessons")
+
    @@index([title])
    @@map("lessons")
+}
+
+model Group {
+   id         String   @id @default(uuid()) @db.Uuid
+   groupName  String   @map("group_name") @db.VarChar(150)
+   courseName String   @map("course_name") @db.VarChar(150)
+   comment    String?  @map("comment") @db.VarChar(500)
+   startDate  DateTime @map("start_date")
+   createdAt  DateTime @default(now()) @map("created_at")
+   updatedAt  DateTime @updatedAt @map("updated_at")
+
+   users           User[]           @relation("GroupUsers")
+   studentProfiles StudentProfile[] @relation("GroupStudentProfiles")
+   lessons         Lesson[]         @relation("GroupLessons")
+   activeLessons   Int              @default(0) @map("active_lessons")
+
+   @@index([groupName])
+   @@index([courseName])
+   @@index([startDate])
+   @@map("groups")
 }

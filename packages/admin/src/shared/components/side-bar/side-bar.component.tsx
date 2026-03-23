@@ -8,9 +8,9 @@ import {
 	cx,
 } from '@emotion/css'
 import {
-	Coins,
-	Home,
+	Users,
 	Book,
+	Settings,
 } from '../../../assets/icons'
 import {
 	Button,
@@ -68,20 +68,6 @@ export const SideBar: React.FC = () => {
 					profileRef={profileRef}
 				/>
 				<div className={buttonWrapper}>
-					<Tooltip text='Home'>
-						<Button<ButtonType.ICON>
-							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.HOME,) && currentBtn,)}
-							onClick={() => {
-								navigate(RouterKeys.HOME,)
-							}}
-							additionalProps={{
-								icon:    <Home width={20} height={20}/>,
-								btnType:  ButtonType.ICON,
-								size:     Size.MEDIUM,
-								color:    Color.MICRO,
-							}}
-						/>
-					</Tooltip>
 					<Tooltip text='Students'>
 						<Button<ButtonType.ICON>
 							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.STUDENTS,) && currentBtn,)}
@@ -89,7 +75,7 @@ export const SideBar: React.FC = () => {
 								navigate(RouterKeys.STUDENTS,)
 							}}
 							additionalProps={{
-								icon:    <Coins width={20} height={20}/>,
+								icon:    <Users width={20} height={20}/>,
 								btnType:  ButtonType.ICON,
 								size:     Size.MEDIUM,
 								color:    Color.MICRO,
@@ -110,6 +96,20 @@ export const SideBar: React.FC = () => {
 									state: null,
 								},)
 								resetCustomLessonStore()
+							}}
+						/>
+					</Tooltip>
+					<Tooltip text='Groups'>
+						<Button<ButtonType.ICON>
+							className={cx(sidebarBtn, location.pathname.includes(RouterKeys.GROUPS,) && currentBtn,)}
+							onClick={() => {
+								navigate(RouterKeys.GROUPS,)
+							}}
+							additionalProps={{
+								icon:    <Settings width={20} height={20}/>,
+								btnType:  ButtonType.ICON,
+								size:     Size.MEDIUM,
+								color:    Color.MICRO,
 							}}
 						/>
 					</Tooltip>

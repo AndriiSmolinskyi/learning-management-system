@@ -12,18 +12,18 @@ import * as styles from './form-buttons.styles'
 
 type Props = {
 	disabled: boolean
-	handleAddEnother: () => void
+	handleAddAnother: () => void
 }
 
 export const AddAnotherButton: React.FC<Props> = ({
-	handleAddEnother,
+	handleAddAnother,
 	disabled,
 },) => {
 	return (
 		<div className={styles.addAnother}>
 			<Button<ButtonType.TEXT>
 				disabled={disabled}
-				onClick={handleAddEnother}
+				onClick={handleAddAnother}
 				additionalProps={{
 					btnType:  ButtonType.TEXT,
 					text:     'Add another',

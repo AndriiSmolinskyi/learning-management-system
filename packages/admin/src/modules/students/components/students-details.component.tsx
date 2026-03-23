@@ -54,13 +54,17 @@ export const StudentDetails: React.FC<Props> = ({
 							hasBorder: true,
 						},)}>
 							<p className={styles.detailsItemTitle}>Country</p>
-							<div className={styles.detailsItemText}><p>{student.country}</p></div>
+							<div className={styles.detailsItemText}><p>{student.country ?
+								'' :
+								'N/A'}</p></div>
 						</div>
 						<div className={styles.detailsItemWrapper({
 							hasBorder: true,
 						},)}>
 							<p className={styles.detailsItemTitle}>City</p>
-							<div className={styles.detailsItemText}><p>{student.city}</p></div>
+							<div className={styles.detailsItemText}><p>{student.city ?
+								'' :
+								'N/A'}</p></div>
 						</div>
 						<div className={styles.detailsItemWrapper({
 							hasBorder: Boolean(student.comment,), hasBorderRadiusBottom: !Boolean(student.comment,),

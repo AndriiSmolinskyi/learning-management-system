@@ -22,4 +22,6 @@ export class RouterKeys {
 	public static LESSONS = '/lessons'
 
 	public static CUSTOM_LESSONS = `custom`
+
+	public static GROUPS = `/groups`
 }
