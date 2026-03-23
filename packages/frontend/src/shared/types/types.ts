@@ -4,6 +4,18 @@ import type {
 
 export type TExcelSheetType = Array<Array<string | number | Date>>
 
+export interface IProgressBarStep {
+	labelTitle: string
+	labelDesc: string
+}
+
+export interface IOptionType<T = string> {
+	label: string
+	value: T
+}
+
+// auth types
+
 export enum AuthPortal {
 	STUDENT = 'STUDENT',
 	ADMIN = 'ADMIN',
@@ -30,11 +42,6 @@ export type AuthCheckReturn = {
 	auth: boolean
 	role?: Role
 	userId?: string
-}
-
-export interface IOptionType<T = string> {
-	label: string
-	value: T
 }
 
 export type ForgotPasswordBody = {
@@ -64,3 +71,39 @@ export type SelectValueType<T = string> =
 	SingleValue<IOptionType<T>> |
 	MultiValue<IOptionType<T>> |
 	undefined
+
+// groups
+
+export type GroupLessonStudentItem = {
+	id: string
+	title: string
+	comment?: string | null
+	payload?: Record<string, unknown> | null
+	createdAt: string
+	updatedAt: string
+}
+
+export type StudentGroupListItem = {
+	id: string
+	groupName: string
+	courseName: string
+	startDate: string
+	activeLessons: number
+	createdAt: string
+	updatedAt: string
+}
+
+export type StudentGroupsListReturn = {
+	items: Array<StudentGroupListItem>
+}
+
+export type StudentGroupItem = {
+	id: string
+	groupName: string
+	courseName: string
+	startDate: string
+	activeLessons: number
+	createdAt: string
+	updatedAt: string
+	lessons: Array<GroupLessonStudentItem>
+}

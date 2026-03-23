@@ -18,9 +18,6 @@ import {
 	useBackdrop,
 } from '../../../../../store/backdrop.store'
 import {
-	useUserStore,
-} from '../../../../../store/user.store'
-import {
 	getAvatar,
 } from '../../utils'
 
@@ -51,10 +48,6 @@ export const ProfileDialog: React.FC<IProps> = ({
 	toggleOpen,
 },) => {
 	const {
-		userInfo,
-	} = useUserStore()
-
-	const {
 		setVisible,
 	} = useBackdrop()
 
@@ -66,25 +59,6 @@ export const ProfileDialog: React.FC<IProps> = ({
 			>
 				<CloseXIcon width={20} height={20} />
 			</button>
-			<div className={infoWrapper}>
-				<div className={avatar}>
-					<span>{getAvatar(userInfo.name,)}</span>
-				</div>
-				<div className={info}>
-					<p>{userInfo.name}</p>
-					<span>{userInfo.email}</span>
-				</div>
-			</div>
-			{userInfo.roles.length > 0 && (
-				userInfo.roles.map((role,) => {
-					return (
-						<div key={role} className={roleStyle}>
-							<p>{userInfo.roles}</p>
-							<span/>
-						</div>
-					)
-				},)
-			)}
 			<button
 				type='button'
 				onClick={onButtonClick}

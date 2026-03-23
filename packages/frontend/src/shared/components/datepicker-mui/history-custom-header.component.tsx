@@ -23,7 +23,7 @@ import {
 } from 'date-fns'
 import {
 	formatDateToDDMMYYYY,
-} from '../../utils'
+} from '../../../shared/utils'
 import Button from '@mui/material/Button'
 
 interface ICustomCalendarHeaderProps extends PickersCalendarHeaderProps<Date> {

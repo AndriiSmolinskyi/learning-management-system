@@ -28,4 +28,8 @@ export class CreateStudentDto {
 	@IsOptional()
 	@IsString()
 	public city?: string
+
+	@IsOptional()
+	@IsString()
+	public comment?: string
 }
