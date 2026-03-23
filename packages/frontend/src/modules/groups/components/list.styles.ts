@@ -113,6 +113,8 @@ export const main = css`
 	margin-top: 20px;
 	box-shadow: -2px 4px 10px 0px #2A2C731F;
 	display: flex;
+		border-radius: 26px;
+	overflow: hidden;
 `
 
 export const side = css`
