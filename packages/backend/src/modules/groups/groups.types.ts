@@ -38,3 +38,37 @@ export type GroupItemExtended = GroupItem & {
 	studentProfiles: Array<GroupStudentProfileItem>
 	lessons: Array<GroupLessonItem>
 }
+
+export type StudentGroupListItem = {
+	id: string
+	groupName: string
+	courseName: string
+	startDate: string
+	activeLessons: number
+	createdAt: string
+	updatedAt: string
+}
+
+export type StudentGroupsListReturn = {
+	items: Array<StudentGroupListItem>
+}
+
+export type GroupLessonStudentItem = {
+	id: string
+	title: string
+	comment?: string | null
+	payload?: Record<string, unknown> | null
+	createdAt: string
+	updatedAt: string
+}
+
+export type StudentGroupItem = {
+	id: string
+	groupName: string
+	courseName: string
+	startDate: string
+	activeLessons: number
+	createdAt: string
+	updatedAt: string
+	lessons: Array<GroupLessonStudentItem>
+}

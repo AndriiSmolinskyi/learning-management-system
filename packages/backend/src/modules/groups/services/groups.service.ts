@@ -27,6 +27,8 @@ import type {
 	GroupItem,
 	GroupsListReturn,
 	GroupItemExtended,
+	StudentGroupItem,
+	StudentGroupsListReturn,
 } from '../groups.types'
 
 @Injectable()
@@ -320,6 +322,109 @@ export class GroupsService {
 		},)
 
 		return this.getGroupById(groupId,)
+	}
+
+	public async getMyGroups(userId: string,): Promise<StudentGroupsListReturn> {
+		const groups = await this.prismaService.group.findMany({
+			where: {
+				users: {
+					some: {
+						id: userId,
+					},
+				},
+			},
+			select: {
+				id:            true,
+				groupName:     true,
+				courseName:    true,
+				startDate:     true,
+				activeLessons: true,
+				createdAt:     true,
+				updatedAt:     true,
+			},
+			orderBy: [
+				{ createdAt: 'desc', },
+				{ id: 'desc', },
+			],
+		},)
+
+		return {
+			items: groups.map((group,) => {
+				return {
+					id:            group.id,
+					groupName:     group.groupName,
+					courseName:    group.courseName,
+					startDate:     group.startDate.toISOString(),
+					activeLessons: group.activeLessons,
+					createdAt:     group.createdAt.toISOString(),
+					updatedAt:     group.updatedAt.toISOString(),
+				}
+			},),
+		}
+	}
+
+	public async getMyGroupById(
+		userId: string,
+		groupId: string,
+	): Promise<StudentGroupItem> {
+		const group = await this.prismaService.group.findFirst({
+			where: {
+				id:    groupId,
+				users: {
+					some: {
+						id: userId,
+					},
+				},
+			},
+			select: {
+				id:            true,
+				groupName:     true,
+				courseName:    true,
+				startDate:     true,
+				activeLessons: true,
+				createdAt:     true,
+				updatedAt:     true,
+				lessons:       {
+					select: {
+						id:        true,
+						title:     true,
+						comment:   true,
+						payload:   true,
+						createdAt: true,
+						updatedAt: true,
+					},
+					orderBy: {
+						createdAt: 'asc',
+					},
+				},
+			},
+		},)
+
+		if (!group) {
+			throw new NotFoundException('Group not found',)
+		}
+
+		const visibleLessons = group.lessons.slice(0, group.activeLessons,)
+
+		return {
+			id:            group.id,
+			groupName:     group.groupName,
+			courseName:    group.courseName,
+			startDate:     group.startDate.toISOString(),
+			activeLessons: group.activeLessons,
+			createdAt:     group.createdAt.toISOString(),
+			updatedAt:     group.updatedAt.toISOString(),
+			lessons:       visibleLessons.map((lesson,) => {
+				return {
+					id:        lesson.id,
+					title:     lesson.title,
+					comment:   lesson.comment,
+					payload:   lesson.payload as Record<string, unknown> | null,
+					createdAt: lesson.createdAt.toISOString(),
+					updatedAt: lesson.updatedAt.toISOString(),
+				}
+			},),
+		}
 	}
 
 	private async ensureGroupExists(id: string,): Promise<void> {
