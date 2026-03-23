@@ -27,6 +27,7 @@ import type {
 	UpdateGroupBody,
 	OkResponse,
 	ChangeGroupStudentsBody,
+	ChangeGroupLessonsBody,
 } from '../../types'
 import {
 	queryKeys,
@@ -132,6 +133,36 @@ export const useChangeGroupStudents = (): UseMutationResult<
 			await toasterService.showErrorToast({
 				message: error instanceof AxiosError ?
 					error.response?.data?.message ?? 'Failed to update group students' :
+					error.message,
+			},)
+		},
+	},)
+}
+
+export const useChangeGroupLessons = (): UseMutationResult<
+	GroupItemExtended,
+	Error,
+	{ id: string, body: ChangeGroupLessonsBody }
+> => {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationFn: async({
+			id,
+			body,
+		}: { id: string, body: ChangeGroupLessonsBody },) => {
+			return groupsService.changeGroupLessons(id, body,)
+		},
+		onSuccess(data,) {
+			queryClient.setQueryData([queryKeys.GROUPS, data.id,], data,)
+			queryClient.invalidateQueries({
+				queryKey: [queryKeys.GROUPS,],
+			},)
+		},
+		async onError(error,) {
+			await toasterService.showErrorToast({
+				message: error instanceof AxiosError ?
+					error.response?.data?.message ?? 'Failed to update group lessons' :
 					error.message,
 			},)
 		},

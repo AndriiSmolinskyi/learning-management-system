@@ -188,3 +188,8 @@ export const itemsBlock = css`
 	flex-direction: column;
 	gap: 20px;
 `
+
+export const activeBlock = css`
+	${fieldBlock}
+	margin-bottom: 20px;
+`

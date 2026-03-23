@@ -233,6 +233,7 @@ export type GroupLessonItem = {
 }
 
 export type GroupItemExtended = GroupItem & {
+	activeLessons: number
 	studentProfiles: Array<GroupStudentProfileItem>
 	lessons: Array<GroupLessonItem>
 }
@@ -268,4 +269,9 @@ export type UpdateGroupBody = {
 
 export type ChangeGroupStudentsBody = {
 	studentIds: Array<string>
+}
+
+export type ChangeGroupLessonsBody = {
+	lessonIds: Array<string>
+	activeLessons: number
 }

@@ -18,6 +18,8 @@ import {
 	PenSquare,
 	Trash,
 	User,
+	Book,
+	Eye,
 } from '../../../assets/icons'
 import type {
 	GroupItem,
@@ -32,6 +34,8 @@ type Props = {
 	children: React.ReactNode
 	group: GroupItem
 	setDialogOpen: (value: boolean) => void
+	toggleLessonsVisible: (id?: string) => void
+	toggleDetailsVisible: (id?: string) => void
 	toggleStudentsVisible: (id?: string) => void
 	handleOpenDeleteModal: (groupId: string) => void
 	toggleUpdateVisible: (group: TEditableGroup) => void
@@ -42,11 +46,28 @@ export const ItemDialog: React.FC<Props> = ({
 	group,
 	setDialogOpen,
 	toggleUpdateVisible,
+	toggleDetailsVisible,
+	toggleLessonsVisible,
 	handleOpenDeleteModal,
 	toggleStudentsVisible,
 },) => {
 	const content = (
 		<div className={styles.dialogContainer}>
+			<Button<ButtonType.TEXT>
+				className={cx(Classes.POPOVER_DISMISS, styles.actionBtn,)}
+				onClick={() => {
+					setTimeout(() => {
+						toggleDetailsVisible(group.id,)
+					}, 300,)
+				}}
+				additionalProps={{
+					btnType:  ButtonType.TEXT,
+					text:     'View details',
+					leftIcon: <Eye width={20} height={20} />,
+					size:     Size.MEDIUM,
+					color:    Color.NON_OUT_BLUE,
+				}}
+			/>
 			<Button<ButtonType.TEXT>
 				className={cx(Classes.POPOVER_DISMISS, styles.actionBtn,)}
 				onClick={() => {
@@ -73,6 +94,21 @@ export const ItemDialog: React.FC<Props> = ({
 					btnType:  ButtonType.TEXT,
 					text:     'Students',
 					leftIcon: <User width={20} height={20} />,
+					size:     Size.MEDIUM,
+					color:    Color.NON_OUT_BLUE,
+				}}
+			/>
+			<Button<ButtonType.TEXT>
+				className={cx(Classes.POPOVER_DISMISS, styles.actionBtn,)}
+				onClick={() => {
+					setTimeout(() => {
+						toggleLessonsVisible(group.id,)
+					}, 300,)
+				}}
+				additionalProps={{
+					btnType:  ButtonType.TEXT,
+					text:     'Lessons',
+					leftIcon: <Book width={20} height={20} />,
 					size:     Size.MEDIUM,
 					color:    Color.NON_OUT_BLUE,
 				}}

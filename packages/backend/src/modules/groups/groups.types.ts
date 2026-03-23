@@ -34,6 +34,7 @@ export type GroupLessonItem = Pick<
 }
 
 export type GroupItemExtended = GroupItem & {
+	activeLessons?: number
 	studentProfiles: Array<GroupStudentProfileItem>
 	lessons: Array<GroupLessonItem>
 }

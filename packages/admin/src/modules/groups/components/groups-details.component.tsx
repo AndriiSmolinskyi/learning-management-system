@@ -3,83 +3,87 @@ import React from 'react'
 import {
 	format,
 } from 'date-fns'
+
 import {
-	useStudent,
-} from '../../../shared/hooks/students/students.hooks'
+	useGroup,
+} from '../../../shared/hooks/groups/groups.hook'
 import * as styles from './groups-details.styles'
 
 type Props = {
 	onClose: () => void
-	studentId: string | undefined
+	groupId: string | undefined
 }
 
-export const StudentDetails: React.FC<Props> = ({
-	studentId,
+export const GroupDetails: React.FC<Props> = ({
+	groupId,
 },) => {
 	const {
-		data: student,
-	} = useStudent(studentId,)
+		data: group,
+	} = useGroup(groupId,)
 
 	return (
 		<div className={styles.formContainer}>
-			<h3 className={styles.formHeader}>Students details</h3>
+			<h3 className={styles.formHeader}>Group details</h3>
 			<div className={styles.detailsFormWrapper}>
-				{student && (
+				{group && (
 					<>
 						<div className={styles.detailsItemWrapper({
-							hasBorder: true, hasBorderRadiusTop: true,
+							hasBorder:          true,
+							hasBorderRadiusTop: true,
 						},)}>
-							<p className={styles.detailsItemTitle}>Student ID</p>
-							<div className={styles.detailsItemText}><p>{student.id}</p></div>
+							<p className={styles.detailsItemTitle}>Group name</p>
+							<div className={styles.detailsItemText}>
+								<p>{group.groupName}</p>
+							</div>
 						</div>
+
 						<div className={styles.detailsItemWrapper({
 							hasBorder: true,
 						},)}>
-							<p className={styles.detailsItemTitle}>Student name</p>
-							<div className={styles.detailsItemText}><p>{student.firstName} {student.lastName}</p></div>
+							<p className={styles.detailsItemTitle}>Course name</p>
+							<div className={styles.detailsItemText}>
+								<p>{group.courseName}</p>
+							</div>
 						</div>
+
 						<div className={styles.detailsItemWrapper({
 							hasBorder: true,
 						},)}>
-							<p className={styles.detailsItemTitle}>Email</p>
-							<div className={styles.detailsItemText}><p>{student.email}</p></div>
+							<p className={styles.detailsItemTitle}>Start date</p>
+							<div className={styles.detailsItemText}>
+								<p>{format(group.startDate, 'dd.MM.yyyy',)}</p>
+							</div>
 						</div>
+
 						<div className={styles.detailsItemWrapper({
 							hasBorder: true,
-						},)}>
-							<p className={styles.detailsItemTitle}>Phone number</p>
-							<div className={styles.detailsItemText}><p>{student.phoneNumber}</p></div>
-						</div>
-						<div className={styles.detailsItemWrapper({
-							hasBorder: true,
-						},)}>
-							<p className={styles.detailsItemTitle}>Country</p>
-							<div className={styles.detailsItemText}><p>{student.country}</p></div>
-						</div>
-						<div className={styles.detailsItemWrapper({
-							hasBorder: true,
-						},)}>
-							<p className={styles.detailsItemTitle}>City</p>
-							<div className={styles.detailsItemText}><p>{student.city}</p></div>
-						</div>
-						<div className={styles.detailsItemWrapper({
-							hasBorder: Boolean(student.comment,), hasBorderRadiusBottom: !Boolean(student.comment,),
 						},)}>
 							<p className={styles.detailsItemTitle}>Created at</p>
-							<div className={styles.detailsItemText}><p>{format(student.createdAt, 'dd.MM.yyyy',)}</p></div>
+							<div className={styles.detailsItemText}>
+								<p>{format(group.createdAt, 'dd.MM.yyyy',)}</p>
+							</div>
 						</div>
-						{student.comment && (
+
+						<div className={styles.detailsItemWrapper({
+							hasBorder:             Boolean(group.comment,),
+							hasBorderRadiusBottom: !Boolean(group.comment,),
+						},)}>
+							<p className={styles.detailsItemTitle}>Active lessons</p>
+							<div className={styles.detailsItemText}>
+								<p>{group.activeLessons}</p>
+							</div>
+						</div>
+
+						{group.comment && (
 							<div className={styles.detailsCommentWrapper}>
 								<p>Comment</p>
-								<span>{student.comment}</span>
+								<span>{group.comment}</span>
 							</div>
 						)}
 					</>
 				)}
 			</div>
-			<div className={styles.addBtnWrapper}>
-
-			</div>
+			<div className={styles.addBtnWrapper} />
 		</div>
 	)
 }

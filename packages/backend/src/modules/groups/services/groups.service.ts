@@ -147,13 +147,14 @@ export class GroupsService {
 		const group = await this.prismaService.group.findUnique({
 			where:  { id, },
 			select: {
-				id:         true,
-				groupName:  true,
-				courseName: true,
-				comment:    true,
-				startDate:  true,
-				createdAt:  true,
-				updatedAt:  true,
+				id:            true,
+				groupName:     true,
+				courseName:    true,
+				comment:       true,
+				startDate:     true,
+				activeLessons: true,
+				createdAt:     true,
+				updatedAt:     true,
 
 				studentProfiles: {
 					select: {
@@ -192,13 +193,14 @@ export class GroupsService {
 		}
 
 		return {
-			id:         group.id,
-			groupName:  group.groupName,
-			courseName: group.courseName,
-			comment:    group.comment,
-			startDate:  group.startDate.toISOString(),
-			createdAt:  group.createdAt.toISOString(),
-			updatedAt:  group.updatedAt.toISOString(),
+			id:            group.id,
+			groupName:     group.groupName,
+			courseName:    group.courseName,
+			comment:       group.comment,
+			startDate:     group.startDate.toISOString(),
+			activeLessons: group.activeLessons,
+			createdAt:     group.createdAt.toISOString(),
+			updatedAt:     group.updatedAt.toISOString(),
 
 			studentProfiles: group.studentProfiles.map((student,) => {
 				return {
@@ -271,6 +273,47 @@ export class GroupsService {
 				studentProfiles: {
 					set: uniqueStudentIds.map((userId,) => {
 						return { userId, }
+					},),
+				},
+			},
+		},)
+
+		return this.getGroupById(groupId,)
+	}
+
+	public async changeGroupLessons(
+		groupId: string,
+		lessonIds: Array<string>,
+		activeLessons: number,
+	): Promise<GroupItemExtended> {
+		await this.ensureGroupExists(groupId,)
+
+		const uniqueLessonIds = Array.from(new Set(lessonIds,),)
+
+		const lessons = await this.prismaService.lesson.findMany({
+			where: {
+				id: { in: uniqueLessonIds, },
+			},
+			select: {
+				id: true,
+			},
+		},)
+
+		if (lessons.length !== uniqueLessonIds.length) {
+			throw new BadRequestException('Some lessons were not found',)
+		}
+
+		if (activeLessons > uniqueLessonIds.length) {
+			throw new BadRequestException('Active lessons cannot be greater than total lessons count',)
+		}
+
+		await this.prismaService.group.update({
+			where: { id: groupId, },
+			data:  {
+				activeLessons,
+				lessons: {
+					set: uniqueLessonIds.map((id,) => {
+						return { id, }
 					},),
 				},
 			},

@@ -93,6 +93,7 @@ model Group {
    users           User[]           @relation("GroupUsers")
    studentProfiles StudentProfile[] @relation("GroupStudentProfiles")
    lessons         Lesson[]         @relation("GroupLessons")
+   activeLessons   Int              @default(0) @map("active_lessons")
 
    @@index([groupName])
    @@index([courseName])

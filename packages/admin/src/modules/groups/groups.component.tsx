@@ -39,6 +39,12 @@ import type {
 import {
 	GroupsStudents,
 } from './components/groups-students.component'
+import {
+	GroupsLessons,
+} from './components/groups-lessons.component'
+import {
+	GroupDetails,
+} from './components/groups-details.component'
 import * as styles from './groups.styles'
 
 export const Groups: React.FC = () => {
@@ -51,6 +57,10 @@ export const Groups: React.FC = () => {
 	const [editableGroup, setEditableGroup,] = React.useState<TEditableGroup | undefined>(undefined,)
 	const [isStudentsOpen, setIsStudentsOpen,] = React.useState<boolean>(false,)
 	const [studentsGroupId, setStudentsGroupId,] = React.useState<string | undefined>(undefined,)
+	const [isLessonsOpen, setIsLessonsOpen,] = React.useState<boolean>(false,)
+	const [lessonsGroupId, setLessonsGroupId,] = React.useState<string | undefined>(undefined,)
+	const [isDetailsOpen, setIsDetailsOpen,] = React.useState<boolean>(false,)
+	const [detailsGroupId, setDetailsGroupId,] = React.useState<string | undefined>(undefined,)
 
 	const toggleExitDialogVisible = toggleState(setIsExitDialogOpen,)
 	const toggleSuccessDialogVisible = toggleState(setIsSuccessDialogOpen,)
@@ -95,6 +105,28 @@ export const Groups: React.FC = () => {
 		setStudentsGroupId(undefined,)
 	}, [],)
 
+	const toggleLessonsVisible = React.useCallback((id?: string,) => {
+		setLessonsGroupId(id,)
+		setIsLessonsOpen((prev,) => {
+			return !prev
+		},)
+	}, [],)
+
+	const handleLessonsDrawerClose = React.useCallback((): void => {
+		setIsLessonsOpen(false,)
+		setLessonsGroupId(undefined,)
+	}, [],)
+
+	const toggleDetailsVisible = React.useCallback((id?: string,) => {
+		setDetailsGroupId(id,)
+		setIsDetailsOpen(true,)
+	}, [],)
+
+	const handleDetailsDrawerClose = React.useCallback((): void => {
+		setIsDetailsOpen(false,)
+		setDetailsGroupId(undefined,)
+	}, [],)
+
 	const {
 		filter,
 	} = useGroupsStore()
@@ -115,8 +147,10 @@ export const Groups: React.FC = () => {
 				groupList={groupList?.items}
 				onAddGroup={handleOpenDrawer}
 				toggleUpdateVisible={toggleUpdateVisible}
-				toggleStudentsVisible={toggleStudentsVisible}
+				toggleLessonsVisible={toggleLessonsVisible}
+				toggleDetailsVisible={toggleDetailsVisible}
 				handleOpenDeleteModal={handleOpenDeleteModal}
+				toggleStudentsVisible={toggleStudentsVisible}
 			/>
 
 			<Drawer
@@ -181,6 +215,28 @@ export const Groups: React.FC = () => {
 				<GroupsStudents
 					onClose={handleStudentsDrawerClose}
 					groupId={studentsGroupId}
+				/>
+			</Drawer>
+			<Drawer
+				isOpen={isLessonsOpen}
+				onClose={handleLessonsDrawerClose}
+				isCloseButtonShown
+				nonPortalContainer
+			>
+				<GroupsLessons
+					onClose={handleLessonsDrawerClose}
+					groupId={lessonsGroupId}
+				/>
+			</Drawer>
+			<Drawer
+				isOpen={isDetailsOpen}
+				onClose={handleDetailsDrawerClose}
+				isCloseButtonShown
+				nonPortalContainer
+			>
+				<GroupDetails
+					onClose={handleDetailsDrawerClose}
+					groupId={detailsGroupId}
 				/>
 			</Drawer>
 		</div>

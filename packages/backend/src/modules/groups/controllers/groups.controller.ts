@@ -24,6 +24,7 @@ import { CreateGroupDto, } from '../dto/create-group.dto'
 import { UpdateGroupDto, } from '../dto/update-group.dto'
 import { GetGroupsDto, } from '../dto/get-groups.dto'
 import { ChangeGroupStudentsDto, } from '../dto/change-group-students.dto'
+import { ChangeGroupLessonsDto, } from '../dto/change-group-lessons.dto'
 
 import type {
 	GroupItem,
@@ -88,6 +89,22 @@ export class GroupsController {
 		@Body() body: ChangeGroupStudentsDto,
 	): Promise<GroupItemExtended> {
 		return this.groupsService.changeGroupStudents(id, body.studentIds,)
+	}
+
+	@Patch(GroupsRoutes.LESSONS,)
+	@ApiBody({
+		description: 'Replace group lessons and set active lessons count',
+		type:        ChangeGroupLessonsDto,
+	},)
+	public async changeGroupLessons(
+		@Param('id',) id: string,
+		@Body() body: ChangeGroupLessonsDto,
+	): Promise<GroupItemExtended> {
+		return this.groupsService.changeGroupLessons(
+			id,
+			body.lessonIds,
+			body.activeLessons,
+		)
 	}
 
 	@Delete(GroupsRoutes.BY_ID,)

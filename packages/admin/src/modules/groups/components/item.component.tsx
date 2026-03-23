@@ -26,6 +26,8 @@ import * as styles from './table.style'
 
 type Props = {
 	group: GroupItem
+	toggleLessonsVisible: (id?: string) => void
+	toggleDetailsVisible: (id?: string) => void
 	toggleStudentsVisible: (id?: string) => void
 	handleOpenDeleteModal: (groupId: string) => void
 	toggleUpdateVisible: (group: TEditableGroup) => void
@@ -34,6 +36,8 @@ type Props = {
 export const TableItem: React.FC<Props> = ({
 	group,
 	toggleUpdateVisible,
+	toggleLessonsVisible,
+	toggleDetailsVisible,
 	handleOpenDeleteModal,
 	toggleStudentsVisible,
 },) => {
@@ -47,6 +51,8 @@ export const TableItem: React.FC<Props> = ({
 						group={group}
 						setDialogOpen={setIsPopoverShown}
 						toggleUpdateVisible={toggleUpdateVisible}
+						toggleLessonsVisible={toggleLessonsVisible}
+						toggleDetailsVisible={toggleDetailsVisible}
 						handleOpenDeleteModal={handleOpenDeleteModal}
 						toggleStudentsVisible={toggleStudentsVisible}
 					>

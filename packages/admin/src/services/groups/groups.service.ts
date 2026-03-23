@@ -15,6 +15,7 @@ import type {
 	UpdateGroupBody,
 	OkResponse,
 	ChangeGroupStudentsBody,
+	ChangeGroupLessonsBody,
 } from '../../shared/types'
 
 import {
@@ -53,6 +54,13 @@ class GroupsService {
 		body: ChangeGroupStudentsBody,
 	): Promise<GroupItemExtended> {
 		return this.httpService.patch(`${this.module}/${id}/${GroupRoutes.STUDENTS}`, body,)
+	}
+
+	public async changeGroupLessons(
+		id: string,
+		body: ChangeGroupLessonsBody,
+	): Promise<GroupItemExtended> {
+		return this.httpService.patch(`${this.module}/${id}/${GroupRoutes.LESSONS}`, body,)
 	}
 
 	public async deleteGroup(id: string,): Promise<OkResponse> {

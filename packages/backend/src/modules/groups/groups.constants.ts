@@ -6,4 +6,5 @@ export const GroupsRoutes = {
 	CREATE:   'create',
 	LIST:     'list',
 	STUDENTS: ':id/students',
+	LESSONS:  ':id/lessons',
 } as const
